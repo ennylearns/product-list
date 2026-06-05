@@ -1,12 +1,24 @@
 'use client';
 
-import { useActionState } from 'react';
-import { createProduct } from '@/src/lib/actions/product';
+import { useActionState, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { ProductFormState } from '@/src/lib/validations/product';
 import { ImageUpload } from '@/src/components/products/image-upload';
 
-function SubmitButton() {
+interface ProductFormProps {
+  initialData?: {
+    id: number;
+    name: string;
+    description: string | null;
+    price: number; // in cents
+    images: string[];
+    inStock: boolean;
+  };
+  action: (prevState: ProductFormState, formData: FormData) => Promise<ProductFormState>;
+  submitLabel?: string;
+}
+
+function SubmitButton({ label }: { label: string }) {
   const { pending } = useFormStatus();
 
   return (
@@ -21,18 +33,21 @@ function SubmitButton() {
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
           </svg>
-          Creating Product...
+          Saving...
         </>
       ) : (
-        'Create Product'
+        label
       )}
     </button>
   );
 }
 
-export function AddProductForm() {
+export function ProductForm({ initialData, action, submitLabel = 'Save Product' }: ProductFormProps) {
   const initialState: ProductFormState = { message: '', errors: {} };
-  const [state, formAction] = useActionState(createProduct, initialState);
+  const [state, formAction] = useActionState(action, initialState);
+  
+  // Local state for stock toggle
+  const [inStock, setInStock] = useState(initialData ? initialData.inStock : true);
 
   return (
     <form action={formAction} className="space-y-6">
@@ -53,6 +68,7 @@ export function AddProductForm() {
           id="name"
           name="name"
           type="text"
+          defaultValue={initialData?.name}
           placeholder="e.g., Signature Heavyweight Hoodie"
           className={`w-full px-5 py-3 rounded-2xl border ${
             state?.errors?.name ? 'border-red-300 ring-red-100' : 'border-slate-200'
@@ -78,6 +94,7 @@ export function AddProductForm() {
             type="number"
             step="0.01"
             min="0"
+            defaultValue={initialData ? (initialData.price / 100).toFixed(2) : undefined}
             placeholder="0.00"
             className={`w-full pl-8 pr-5 py-3 rounded-2xl border ${
               state?.errors?.price ? 'border-red-300 ring-red-100' : 'border-slate-200'
@@ -98,6 +115,7 @@ export function AddProductForm() {
           id="description"
           name="description"
           rows={4}
+          defaultValue={initialData?.description || ''}
           placeholder="Describe the product, materials, sizing, etc."
           className={`w-full px-5 py-3 rounded-2xl border ${
             state?.errors?.description ? 'border-red-300 ring-red-100' : 'border-slate-200'
@@ -108,6 +126,25 @@ export function AddProductForm() {
         )}
       </div>
 
+      <div className="space-y-4">
+        <div className="flex items-center justify-between p-4 bg-slate-50 border border-slate-200 rounded-2xl">
+          <div>
+            <h4 className="text-sm font-bold text-slate-900">In Stock</h4>
+            <p className="text-xs text-slate-500 mt-0.5">Allow customers to order this product</p>
+          </div>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input 
+              type="checkbox" 
+              name="inStock"
+              className="sr-only peer" 
+              checked={inStock}
+              onChange={(e) => setInStock(e.target.checked)}
+            />
+            <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
+          </label>
+        </div>
+      </div>
+
       <div className="space-y-1.5">
         <label className="block text-sm font-bold text-slate-700">
           Product Images <span className="text-slate-400 font-normal">(Optional, up to 5)</span>
@@ -116,11 +153,12 @@ export function AddProductForm() {
           maxFiles={5}
           maxSizeMB={5}
           error={state?.errors?.images?.[0]}
+          initialImages={initialData?.images || []}
         />
       </div>
 
       <div className="pt-4 border-t border-slate-100 flex items-center justify-end">
-        <SubmitButton />
+        <SubmitButton label={submitLabel} />
       </div>
     </form>
   );

@@ -1,5 +1,6 @@
 import { getProducts } from '@/src/lib/actions/product';
 import Link from 'next/link';
+import { ProductCardActions } from '@/src/components/products/product-card-actions';
 
 export default async function ProductsPage() {
   const products = await getProducts();
@@ -48,7 +49,7 @@ export default async function ProductsPage() {
           {products.map((product) => (
             <div 
               key={product.id} 
-              className="group bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-slate-200/50 hover:border-slate-300 transition-all duration-300 flex flex-col"
+              className="group bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-slate-200/50 hover:border-slate-300 transition-all duration-300 flex flex-col relative"
             >
               <div className="aspect-square bg-slate-100 relative border-b border-slate-100 group-hover:bg-slate-200 transition-colors">
                 {product.images && product.images.length > 0 ? (
@@ -66,29 +67,30 @@ export default async function ProductsPage() {
                 )}
                 
                 {product.inStock ? (
-                  <span className="absolute top-3 right-3 bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-md border border-emerald-200 shadow-sm backdrop-blur-sm">
+                  <span className="absolute top-3 right-3 bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-md border border-emerald-200 shadow-sm backdrop-blur-sm z-10">
                     In Stock
                   </span>
                 ) : (
-                  <span className="absolute top-3 right-3 bg-rose-100 text-rose-800 text-xs font-bold px-2.5 py-1 rounded-md border border-rose-200 shadow-sm backdrop-blur-sm">
+                  <span className="absolute top-3 right-3 bg-rose-100 text-rose-800 text-xs font-bold px-2.5 py-1 rounded-md border border-rose-200 shadow-sm backdrop-blur-sm z-10">
                     Out of Stock
                   </span>
                 )}
               </div>
               <div className="p-5 flex-1 flex flex-col">
-                <h3 className="text-lg font-bold text-slate-900 truncate tracking-tight">{product.name}</h3>
-                <p className="text-slate-500 text-sm mt-1 line-clamp-2 leading-relaxed flex-1">
+                <h3 className="text-lg font-bold text-slate-900 truncate tracking-tight">
+                  <Link href={`/dashboard/products/${product.id}/edit`} className="focus:outline-none">
+                    <span className="absolute inset-0 z-0" aria-hidden="true" />
+                    {product.name}
+                  </Link>
+                </h3>
+                <p className="text-slate-500 text-sm mt-1 line-clamp-2 leading-relaxed flex-1 relative z-10 pointer-events-none">
                   {product.description || 'No description provided.'}
                 </p>
-                <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between relative z-10">
                   <span className="text-lg font-black text-slate-900 tracking-tight">
                     ₦{(product.price / 100).toFixed(2)}
                   </span>
-                  <button className="text-slate-400 hover:text-emerald-600 transition-colors p-2 -mr-2 rounded-lg hover:bg-emerald-50 active:bg-emerald-100">
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-                    </svg>
-                  </button>
+                  <ProductCardActions productId={product.id} inStock={product.inStock} />
                 </div>
               </div>
             </div>

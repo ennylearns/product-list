@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { AddProductForm } from './form';
+import { createProduct } from '@/src/lib/actions/product';
+import { ProductForm } from '@/src/components/products/product-form';
 
 export default function NewProductPage() {
   return (
@@ -23,7 +24,7 @@ export default function NewProductPage() {
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden relative">
         <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-slate-800 to-slate-900" />
         <div className="p-6 sm:p-10">
-          <AddProductForm />
+          <ProductForm action={createProduct} submitLabel="Create Product" />
         </div>
       </div>
     </div>

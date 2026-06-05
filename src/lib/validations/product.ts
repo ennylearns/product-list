@@ -5,6 +5,7 @@ export const productSchema = z.object({
   description: z.string().trim().optional(),
   price: z.coerce.number().positive('Price must be a positive number.'),
   images: z.array(z.string().url()).max(5, 'You can upload a maximum of 5 images.').optional(),
+  inStock: z.boolean().optional().default(true),
 });
 
 export type ProductFormState =
@@ -14,6 +15,7 @@ export type ProductFormState =
         description?: string[];
         price?: string[];
         images?: string[];
+        inStock?: string[];
       };
       message?: string;
     }
