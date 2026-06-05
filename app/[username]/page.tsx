@@ -2,15 +2,6 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getStorefrontData } from '@/src/lib/data/storefront';
-import { Cormorant_Garamond } from 'next/font/google';
-
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['300', '400', '600', '700'],
-  style: ['normal', 'italic'],
-  display: 'swap',
-});
-
 // Since the Next.js router params are asynchronous in later Next.js 15+ versions, 
 // we should define the Page component appropriately. Next.js 15 allows `params` to be a Promise.
 // But based on package.json, we are on Next 15 (next 16 doesn't exist, it said 16.2.7 in package.json? Wait, package.json says "next": "16.2.7"? 15.x is current, maybe it's a futuristic version. Let's use standard Next.js async page syntax).
@@ -40,7 +31,7 @@ export default async function StorefrontPage({ params }: Props) {
           <p className="text-sm uppercase tracking-[0.2em] text-[#666666] mb-4 font-medium">
             Curated Collection
           </p>
-          <h1 className={`${cormorant.className} text-6xl md:text-8xl font-light tracking-tight mb-8 leading-[0.9]`}>
+          <h1 className="text-6xl md:text-8xl font-light tracking-tight mb-8 leading-[0.9]">
             {store.name}
           </h1>
           {store.description && (
@@ -97,7 +88,7 @@ export default async function StorefrontPage({ params }: Props) {
                   </div>
                   
                   <div className="flex flex-col space-y-2">
-                    <h3 className={`${cormorant.className} text-xl md:text-2xl font-medium leading-tight group-hover:text-stone-600 transition-colors`}>
+                    <h3 className="text-xl md:text-2xl font-medium leading-tight group-hover:text-stone-600 transition-colors">
                       {product.name}
                     </h3>
                     <p className="text-xs md:text-sm text-stone-500 tracking-wide">
