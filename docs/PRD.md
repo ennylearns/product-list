@@ -57,7 +57,7 @@ Customers visiting shared store links from WhatsApp, Instagram, Facebook, TikTok
 
 ### Authentication
 
-* NextAuth
+* Auth.js v5 (next-auth)
 
 ### Database
 
@@ -83,13 +83,32 @@ Customers visiting shared store links from WhatsApp, Instagram, Facebook, TikTok
 
 Users can:
 
-* Sign up
-* Sign in
+* Sign up (email, password, confirm password)
+* Sign in (email, password)
 * Sign out
 
 Supported providers:
 
-* Email and password
+* Email and password (Credentials provider)
+
+Session strategy:
+
+* JWT (stateless, no sessions table)
+
+Password requirements:
+
+* Minimum 8 characters
+* At least one letter
+* At least one number
+
+Post-signup:
+
+* User is automatically signed in and redirected to the dashboard
+
+Route protection:
+
+* Unauthenticated users accessing `/dashboard/*` are redirected to `/auth/signin`
+* Authenticated users accessing `/auth/*` are redirected to `/dashboard`
 
 ---
 
