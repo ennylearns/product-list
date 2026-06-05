@@ -18,6 +18,7 @@ export async function createProduct(prevState: ProductFormState, formData: FormD
     name: formData.get('name')?.toString(),
     description: formData.get('description')?.toString() || undefined,
     price: formData.get('price'),
+    images: formData.getAll('images').map((img) => img.toString()),
   };
 
   const validatedFields = productSchema.safeParse(rawData);
@@ -48,7 +49,7 @@ export async function createProduct(prevState: ProductFormState, formData: FormD
       description: validatedFields.data.description || null,
       price: priceInCents,
       inStock: true,
-      images: [],
+      images: validatedFields.data.images || [],
     });
   } catch (error) {
     console.error('Error creating product:', error);

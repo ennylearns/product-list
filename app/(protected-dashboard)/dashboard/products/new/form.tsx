@@ -4,6 +4,7 @@ import { useActionState } from 'react';
 import { createProduct } from '@/src/lib/actions/product';
 import { useFormStatus } from 'react-dom';
 import { ProductFormState } from '@/src/lib/validations/product';
+import { ImageUpload } from '@/src/components/products/image-upload';
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -105,6 +106,17 @@ export function AddProductForm() {
         {state?.errors?.description && (
           <p className="text-sm font-medium text-rose-500 mt-1">{state.errors.description[0]}</p>
         )}
+      </div>
+
+      <div className="space-y-1.5">
+        <label className="block text-sm font-bold text-slate-700">
+          Product Images <span className="text-slate-400 font-normal">(Optional, up to 5)</span>
+        </label>
+        <ImageUpload 
+          maxFiles={5}
+          maxSizeMB={5}
+          error={state?.errors?.images?.[0]}
+        />
       </div>
 
       <div className="pt-4 border-t border-slate-100 flex items-center justify-end">
