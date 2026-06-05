@@ -33,7 +33,7 @@ vi.mock('bcryptjs', () => ({
   }
 }));
 
-import { db } from '@/db';
+import { db } from '@/src/db';
 import { authorize } from '../auth';
 
 describe('Auth Authorize Callback', () => {

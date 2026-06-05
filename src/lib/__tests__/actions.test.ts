@@ -35,7 +35,7 @@ vi.mock('next/navigation', () => ({
 
 import { signup, signin, signout } from '../actions';
 import { SignupFormSchema, SigninFormSchema } from '../validations';
-import { db } from '@/db';
+import { db } from '@/src/db';
 import { signIn, signOut } from '../auth';
 import { redirect } from 'next/navigation';
 
