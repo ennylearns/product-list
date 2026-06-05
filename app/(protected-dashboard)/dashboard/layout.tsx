@@ -1,9 +1,21 @@
 import { verifySession } from '@/src/lib/dal';
 import { ReactNode } from 'react';
+import { db } from '@/src/db';
+import { stores } from '@/src/db/schema';
+import { eq } from 'drizzle-orm';
+import { redirect } from 'next/navigation';
 
 export default async function DashboardLayout({ children }: { children: ReactNode }) {
   // Secure server-side check. Redirects to /auth/signin if unauthenticated.
-  await verifySession();
+  const { userId } = await verifySession();
+
+  const userStore = await db.query.stores.findFirst({
+    where: eq(stores.userId, userId),
+  });
+
+  if (!userStore) {
+    redirect('/dashboard/setup');
+  }
 
   return (
     <div className="min-h-screen bg-slate-50">

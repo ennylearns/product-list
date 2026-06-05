@@ -112,16 +112,16 @@ Route protection:
 
 ---
 
-## 6.2 Business Profile
+## 6.2 Store Profile
 
 Each user owns one store.
 
 Fields:
 
-* Business name
+* Store name
 * Username (unique)
 * WhatsApp number
-* Business description
+* Store description
 
 Example:
 
@@ -324,7 +324,7 @@ Actions:
 
 Manage:
 
-* Business name
+* Store name
 * Username
 * WhatsApp number
 * Description

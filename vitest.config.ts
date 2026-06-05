@@ -8,7 +8,7 @@ export default defineConfig({
       POSTGRES_URL: "postgres://default:password@localhost:5432/test"
     },
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(__dirname, './'),
     },
   },
 });

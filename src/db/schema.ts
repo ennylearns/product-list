@@ -14,7 +14,7 @@ export const stores = pgTable('stores', {
     .notNull()
     .unique()
     .references(() => users.id, { onDelete: 'cascade' }),
-  businessName: text('businessName').notNull(),
+  name: text('name').notNull(),
   username: text('username').notNull().unique(),
   whatsappNumber: text('whatsappNumber').notNull(),
   description: text('description'),
