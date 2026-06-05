@@ -9,6 +9,12 @@ export default async function ProductsPage() {
     <div className="space-y-8 animate-in fade-in duration-500">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
+          <Link href="/dashboard" className="inline-flex items-center text-sm font-medium text-slate-500 hover:text-slate-900 mb-3 transition-colors group">
+            <svg className="w-4 h-4 mr-1.5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Dashboard
+          </Link>
           <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">Products</h1>
           <p className="text-slate-500 mt-1 text-sm font-medium">Manage your store catalog and inventory.</p>
         </div>
@@ -45,7 +51,7 @@ export default async function ProductsPage() {
           </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
           {products.map((product) => (
             <div 
               key={product.id} 
@@ -67,27 +73,27 @@ export default async function ProductsPage() {
                 )}
                 
                 {product.inStock ? (
-                  <span className="absolute top-3 right-3 bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-md border border-emerald-200 shadow-sm backdrop-blur-sm z-10">
+                  <span className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-emerald-100 text-emerald-800 text-[10px] sm:text-xs font-bold px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded-md border border-emerald-200 shadow-sm backdrop-blur-sm z-10">
                     In Stock
                   </span>
                 ) : (
-                  <span className="absolute top-3 right-3 bg-rose-100 text-rose-800 text-xs font-bold px-2.5 py-1 rounded-md border border-rose-200 shadow-sm backdrop-blur-sm z-10">
+                  <span className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-rose-100 text-rose-800 text-[10px] sm:text-xs font-bold px-1.5 py-0.5 sm:px-2.5 sm:py-1 rounded-md border border-rose-200 shadow-sm backdrop-blur-sm z-10">
                     Out of Stock
                   </span>
                 )}
               </div>
-              <div className="p-5 flex-1 flex flex-col">
-                <h3 className="text-lg font-bold text-slate-900 truncate tracking-tight">
+              <div className="p-3 sm:p-5 flex-1 flex flex-col">
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 truncate tracking-tight">
                   <Link href={`/dashboard/products/${product.id}/edit`} className="focus:outline-none">
                     <span className="absolute inset-0 z-0" aria-hidden="true" />
                     {product.name}
                   </Link>
                 </h3>
-                <p className="text-slate-500 text-sm mt-1 line-clamp-2 leading-relaxed flex-1 relative z-10 pointer-events-none">
+                <p className="text-slate-500 text-xs sm:text-sm mt-1 line-clamp-2 leading-relaxed flex-1 relative z-10 pointer-events-none">
                   {product.description || 'No description provided.'}
                 </p>
-                <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between relative z-10">
-                  <span className="text-lg font-black text-slate-900 tracking-tight">
+                <div className="mt-3 pt-3 sm:mt-4 sm:pt-4 border-t border-slate-100 flex items-center justify-between relative z-10">
+                  <span className="text-base sm:text-lg font-black text-slate-900 tracking-tight">
                     ₦{(product.price / 100).toFixed(2)}
                   </span>
                   <ProductCardActions productId={product.id} inStock={product.inStock} />

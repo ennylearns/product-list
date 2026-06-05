@@ -67,10 +67,6 @@ Customers visiting shared store links from WhatsApp, Instagram, Facebook, TikTok
 
 * Vercel Blob
 
-### WhatsApp Integration
-
-* OpenWA
-
 ### Deployment
 
 * Vercel
@@ -257,7 +253,7 @@ Out of Stock
 
 # 9. WhatsApp Ordering
 
-Integration uses OpenWA.
+Integration uses standard WhatsApp Click-to-Chat (`wa.me` links).
 
 When a customer clicks:
 
@@ -270,7 +266,6 @@ A WhatsApp message is generated and sent to the seller.
 Message format:
 
 ```
-[PRODUCT IMAGE]
 Hello, I am interested in this product.
 
 Product:

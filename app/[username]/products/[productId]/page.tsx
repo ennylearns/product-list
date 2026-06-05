@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getProductDetails } from '@/src/lib/data/storefront';
+import { WhatsappOrderButton } from '@/src/components/whatsapp-order-button';
 
 type Props = {
   params: Promise<{ username: string; productId: string }>;
@@ -109,15 +110,13 @@ export default async function ProductDetailPage({ params }: Props) {
               </div>
             )}
 
-            <button 
-              disabled={!product.inStock}
-              className={`w-full py-5 px-8 text-sm uppercase tracking-[0.2em] font-medium transition-all duration-500
-                ${product.inStock 
-                  ? 'bg-[#1A1A1A] text-white hover:bg-[#333333]' 
-                  : 'bg-[#E5E5E5] text-[#A3A3A3] cursor-not-allowed'}`}
-            >
-              {product.inStock ? 'Inquire' : 'Unavailable'}
-            </button>
+            <WhatsappOrderButton
+              productName={product.name}
+              productPriceFormatted={priceFormatted}
+              storeName={store.name}
+              whatsappNumber={store.whatsappNumber}
+              inStock={product.inStock}
+            />
             
             {/* Meta details */}
             <div className="mt-16 space-y-6 text-sm text-[#666666]">
