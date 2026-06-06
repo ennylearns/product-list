@@ -23,16 +23,18 @@ export default async function LandingPage() {
               Dashboard
             </Link>
           ) : (
-            <Link href="/login" className="text-sm font-semibold tracking-wider hover:text-emerald-400 transition-colors uppercase">
-              Login
-            </Link>
+            <>
+              <Link href="/login" className="text-sm font-semibold tracking-wider hover:text-emerald-400 transition-colors uppercase">
+                Login
+              </Link>
+              <Link 
+                href="/signup" 
+                className="hidden sm:inline-flex px-6 py-2.5 bg-white text-slate-900 text-sm font-bold uppercase tracking-widest border-2 border-white hover:bg-transparent hover:text-white transition-all shadow-[4px_4px_0px_0px_#10b981] hover:shadow-[2px_2px_0px_0px_#10b981] hover:translate-y-[2px] hover:translate-x-[2px]"
+              >
+                Start Free
+              </Link>
+            </>
           )}
-          <Link 
-            href="/signup" 
-            className="hidden sm:inline-flex px-6 py-2.5 bg-white text-slate-900 text-sm font-bold uppercase tracking-widest border-2 border-white hover:bg-transparent hover:text-white transition-all shadow-[4px_4px_0px_0px_#10b981] hover:shadow-[2px_2px_0px_0px_#10b981] hover:translate-y-[2px] hover:translate-x-[2px]"
-          >
-            Start Free
-          </Link>
         </div>
       </nav>
 
@@ -60,17 +62,31 @@ export default async function LandingPage() {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Link 
-              href="/signup"
-              className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-5 bg-emerald-400 text-slate-900 font-bold uppercase tracking-widest overflow-hidden border-2 border-emerald-400 shadow-[6px_6px_0px_0px_#ffffff] hover:shadow-[2px_2px_0px_0px_#ffffff] hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
-            >
-              <span className="relative z-10 flex items-center gap-3">
-                Create Your Store
-                <svg className="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </span>
-            </Link>
+            {session ? (
+              <Link 
+                href="/dashboard"
+                className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-5 bg-emerald-400 text-slate-900 font-bold uppercase tracking-widest overflow-hidden border-2 border-emerald-400 shadow-[6px_6px_0px_0px_#ffffff] hover:shadow-[2px_2px_0px_0px_#ffffff] hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
+              >
+                <span className="relative z-10 flex items-center gap-3">
+                  Go to Dashboard
+                  <svg className="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
+              </Link>
+            ) : (
+              <Link 
+                href="/signup"
+                className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-5 bg-emerald-400 text-slate-900 font-bold uppercase tracking-widest overflow-hidden border-2 border-emerald-400 shadow-[6px_6px_0px_0px_#ffffff] hover:shadow-[2px_2px_0px_0px_#ffffff] hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
+              >
+                <span className="relative z-10 flex items-center gap-3">
+                  Create Your Store
+                  <svg className="w-5 h-5 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
+              </Link>
+            )}
           </div>
         </div>
       </main>
