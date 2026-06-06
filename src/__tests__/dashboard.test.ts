@@ -32,11 +32,11 @@ describe('getDashboardStats', () => {
 
     expect(dbMock.query.stores.findFirst).toHaveBeenCalled();
     expect(dbMock.query.products.findMany).not.toHaveBeenCalled();
-    expect(result).toEqual({ total: 0, inStock: 0, outOfStock: 0 });
+    expect(result).toEqual({ total: 0, inStock: 0, outOfStock: 0, username: '' });
   });
 
   it('should return correct counts when store exists and has products', async () => {
-    const mockStore = { id: 10, userId: 1 };
+    const mockStore = { id: 10, userId: 1, username: 'teststore' };
     const mockProducts = [
       { id: 101, inStock: true },
       { id: 102, inStock: false },
@@ -55,11 +55,12 @@ describe('getDashboardStats', () => {
       total: 3,
       inStock: 2,
       outOfStock: 1,
+      username: 'teststore',
     });
   });
 
   it('should return 0 counts when store exists but has no products', async () => {
-    const mockStore = { id: 10, userId: 1 };
+    const mockStore = { id: 10, userId: 1, username: 'teststore2' };
     const mockProducts: any[] = [];
 
     dbMock.query.stores.findFirst.mockResolvedValue(mockStore);
@@ -71,6 +72,7 @@ describe('getDashboardStats', () => {
       total: 0,
       inStock: 0,
       outOfStock: 0,
+      username: 'teststore2',
     });
   });
 });

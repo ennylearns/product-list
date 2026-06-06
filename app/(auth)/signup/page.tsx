@@ -10,7 +10,7 @@ export default function SignUpPage() {
   return (
     <>
       <div className="text-center mb-10 -mt-8">
-        <h1 className="text-2xl font-bold text-slate-900 mb-2">Welcome to PRODUCT LIST</h1>
+        <h1 className="text-2xl font-bold text-slate-900 mb-2">Welcome to Storefront</h1>
         <p className="text-slate-500 text-sm">Let's set up your new storefront.</p>
       </div>
 

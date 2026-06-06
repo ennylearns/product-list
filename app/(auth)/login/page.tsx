@@ -63,7 +63,7 @@ export default function SignInPage() {
       </form>
 
       <p className="mt-8 text-center text-sm font-medium text-slate-600">
-        New to PRODUCT LIST?
+        New to Storefront?
         <Link href="/signup" className="ml-2 text-emerald-600 hover:text-emerald-700 transition-colors focus:outline-none">
           Create an account
         </Link>

@@ -67,7 +67,7 @@ export default async function DashboardPage() {
         </div>
       </div>
 
-      <div className="pt-8">
+      <div className="pt-8 flex flex-col sm:flex-row gap-4">
         <Link 
           href="/dashboard/products"
           className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-5 bg-slate-900 text-white font-bold uppercase tracking-widest overflow-hidden border-2 border-slate-900 shadow-[6px_6px_0px_0px_#0f172a] hover:shadow-[2px_2px_0px_0px_#0f172a] hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
@@ -80,6 +80,21 @@ export default async function DashboardPage() {
           </span>
           <div className="absolute inset-0 h-full w-0 bg-emerald-500 transition-all duration-300 ease-out group-hover:w-full z-0"></div>
         </Link>
+        {stats.username && (
+          <Link 
+            href={`/${stats.username}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-5 bg-transparent border-2 border-slate-900 text-slate-900 font-bold uppercase tracking-widest overflow-hidden shadow-[6px_6px_0px_0px_#0f172a] hover:shadow-[2px_2px_0px_0px_#0f172a] hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
+          >
+            <span className="relative z-10 flex items-center gap-3">
+              View Storefront
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </span>
+          </Link>
+        )}
       </div>
     </div>
   );

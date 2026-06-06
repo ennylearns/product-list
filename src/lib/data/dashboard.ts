@@ -12,6 +12,7 @@ export async function getDashboardStats(userId: number) {
       total: 0,
       inStock: 0,
       outOfStock: 0,
+      username: '',
     };
   }
 
@@ -30,5 +31,6 @@ export async function getDashboardStats(userId: number) {
     total,
     inStock,
     outOfStock,
+    username: store.username,
   };
 }

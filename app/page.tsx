@@ -14,7 +14,7 @@ export default async function LandingPage() {
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-emerald-400 rounded-none transform rotate-45 border-2 border-white shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)]"></div>
           <span className={`${bricolage.className} text-xl font-bold tracking-widest uppercase`}>
-            PRODUCT LIST
+            Storefront
           </span>
         </div>
         <div className="flex items-center gap-6">
@@ -120,7 +120,7 @@ export default async function LandingPage() {
 
       {/* Footer */}
       <footer className="py-8 text-center text-slate-500 text-sm tracking-widest uppercase border-t-2 border-slate-800 relative z-10">
-        <p>© {new Date().getFullYear()} PRODUCT LIST. Built for merchants.</p>
+        <p>© {new Date().getFullYear()} STOREFRONT. Built for merchants.</p>
       </footer>
     </div>
   );
