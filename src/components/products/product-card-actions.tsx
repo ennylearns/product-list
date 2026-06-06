@@ -15,7 +15,9 @@ export function ProductCardActions({ productId, inStock }: ProductCardActionsPro
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
 
-  const handleDelete = async () => {
+  const handleDelete = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (window.confirm('Are you sure you want to delete this product? This action cannot be undone.')) {
       startTransition(async () => {
         const result = await deleteProduct(productId);
@@ -28,7 +30,9 @@ export function ProductCardActions({ productId, inStock }: ProductCardActionsPro
     }
   };
 
-  const handleStockToggle = async () => {
+  const handleStockToggle = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     const actionText = inStock ? 'mark as out of stock' : 'mark as in stock';
     if (window.confirm(`Are you sure you want to ${actionText}?`)) {
       startTransition(async () => {
@@ -45,7 +49,11 @@ export function ProductCardActions({ productId, inStock }: ProductCardActionsPro
   return (
     <div className="relative">
       <button 
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setIsMenuOpen(!isMenuOpen);
+        }}
         disabled={isPending}
         className="text-slate-400 hover:text-emerald-600 transition-colors p-2 -mr-2 rounded-lg hover:bg-emerald-50 active:bg-emerald-100 disabled:opacity-50"
       >
@@ -65,7 +73,11 @@ export function ProductCardActions({ productId, inStock }: ProductCardActionsPro
         <>
           <div 
             className="fixed inset-0 z-10" 
-            onClick={() => setIsMenuOpen(false)} 
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsMenuOpen(false);
+            }} 
           />
           <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg shadow-slate-200/50 border border-slate-100 py-1.5 z-20 animate-in fade-in zoom-in-95 duration-200">
             <Link 

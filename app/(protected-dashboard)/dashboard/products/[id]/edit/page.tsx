@@ -41,8 +41,8 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
   return (
     <div className="max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="mb-8">
-        <Link 
-          href="/dashboard/products" 
+        <Link
+          href="/dashboard/products"
           className="inline-flex items-center text-sm font-semibold text-slate-500 hover:text-slate-900 transition-colors mb-6"
         >
           <svg className="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -59,10 +59,10 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden relative">
         <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-slate-800 to-slate-900" />
         <div className="p-6 sm:p-10">
-          <ProductForm 
-            initialData={product} 
-            action={updateProductWithId} 
-            submitLabel="Save Changes" 
+          <ProductForm
+            initialData={product}
+            action={updateProductWithId}
+            submitLabel="Save Changes"
           />
         </div>
       </div>

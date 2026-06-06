@@ -55,9 +55,9 @@ export default async function ProductsPage() {
           {products.map((product) => (
             <div 
               key={product.id} 
-              className="group bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-xl hover:shadow-slate-200/50 hover:border-slate-300 transition-all duration-300 flex flex-col relative"
+              className="group bg-white border border-slate-200 rounded-xl hover:shadow-xl hover:shadow-slate-200/50 hover:border-slate-300 transition-all duration-300 flex flex-col relative"
             >
-              <div className="aspect-square bg-slate-100 relative border-b border-slate-100 group-hover:bg-slate-200 transition-colors">
+              <div className="aspect-square bg-slate-100 relative border-b border-slate-100 group-hover:bg-slate-200 transition-colors rounded-t-xl overflow-hidden">
                 {product.images && product.images.length > 0 ? (
                   <img 
                     src={product.images[0]} 
@@ -82,7 +82,7 @@ export default async function ProductsPage() {
                   </span>
                 )}
               </div>
-              <div className="p-3 sm:p-5 flex-1 flex flex-col">
+              <div className="p-3 sm:p-5 flex-1 flex flex-col rounded-b-xl">
                 <h3 className="text-base sm:text-lg font-bold text-slate-900 truncate tracking-tight">
                   <Link href={`/dashboard/products/${product.id}/edit`} className="focus:outline-none">
                     <span className="absolute inset-0 z-0" aria-hidden="true" />
