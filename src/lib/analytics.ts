@@ -34,5 +34,9 @@ export function trackEvent<T extends GAEventName>(
   name: T,
   params?: GAEventParams[T],
 ): void {
-  sendGAEvent('event', name, params);
+  if (params) {
+    sendGAEvent('event', name, params);
+  } else {
+    sendGAEvent('event', name);
+  }
 }

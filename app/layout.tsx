@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { AnalyticsEventEmitter } from "@/src/components/analytics-event-emitter";
@@ -33,7 +34,9 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         {children}
-        <AnalyticsEventEmitter />
+        <Suspense fallback={null}>
+          <AnalyticsEventEmitter />
+        </Suspense>
       </body>
       {gaId && <GoogleAnalytics gaId={gaId} />}
     </html>

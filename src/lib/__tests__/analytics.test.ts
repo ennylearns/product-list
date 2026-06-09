@@ -32,7 +32,7 @@ describe('Analytics utility', () => {
     it('should pass empty params when none provided', () => {
       trackEvent(GA_EVENTS.STORE_CREATED);
 
-      expect(sendGAEvent).toHaveBeenCalledWith('event', 'store_created', undefined);
+      expect(sendGAEvent).toHaveBeenCalledWith('event', 'store_created');
     });
 
     it('should pass product_added event with boolean params', () => {
