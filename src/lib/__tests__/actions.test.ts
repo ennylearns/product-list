@@ -14,7 +14,7 @@ vi.mock('../validations', () => {
 });
 
 // Mock DB
-vi.mock('@/db', () => ({
+vi.mock('@/src/db', () => ({
   db: {
     insert: vi.fn().mockReturnThis(),
     values: vi.fn().mockReturnThis(),
@@ -170,7 +170,7 @@ describe('Server Actions', () => {
   describe('signout action', () => {
     it('should call signOut', async () => {
       await signout();
-      expect(signOut).toHaveBeenCalledWith({ redirectTo: '/auth/signin' });
+      expect(signOut).toHaveBeenCalledWith({ redirectTo: '/login' });
     });
   });
 });

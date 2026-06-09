@@ -28,29 +28,29 @@ describe('verifySession', () => {
     (auth as any).mockResolvedValue(null);
 
     await expect(verifySession()).rejects.toThrow('REDIRECT');
-    expect(redirect).toHaveBeenCalledWith('/auth/signin');
+    expect(redirect).toHaveBeenCalledWith('/login');
   });
 
   it('should redirect if no user in session', async () => {
     (auth as any).mockResolvedValue({ user: null });
 
     await expect(verifySession()).rejects.toThrow('REDIRECT');
-    expect(redirect).toHaveBeenCalledWith('/auth/signin');
+    expect(redirect).toHaveBeenCalledWith('/login');
   });
 
   it('should redirect if no userId in session', async () => {
     (auth as any).mockResolvedValue({ user: { id: undefined } });
 
     await expect(verifySession()).rejects.toThrow('REDIRECT');
-    expect(redirect).toHaveBeenCalledWith('/auth/signin');
+    expect(redirect).toHaveBeenCalledWith('/login');
   });
 
   it('should return session info if user is authenticated', async () => {
-    (auth as any).mockResolvedValue({ user: { id: 'user_123' } });
+    (auth as any).mockResolvedValue({ user: { id: '123' } });
 
     const result = await verifySession();
 
     expect(redirect).not.toHaveBeenCalled();
-    expect(result).toEqual({ isAuth: true, userId: 'user_123' });
+    expect(result).toEqual({ isAuth: true, userId: 123 });
   });
 });

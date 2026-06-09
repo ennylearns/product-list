@@ -49,13 +49,13 @@ describe('Proxy', () => {
     
     expect(NextResponse.redirect).toHaveBeenCalled();
     const urlStr = (NextResponse.redirect as any).mock.calls[0][0].toString();
-    expect(urlStr).toContain('/auth/signin');
+    expect(urlStr).toContain('/login');
   });
 
   it('should redirect authenticated users away from auth routes', async () => {
     getCookieMock.mockReturnValue(true); // Has authjs session token
     
-    const request = new NextRequest('http://localhost:3000/auth/signin');
+    const request = new NextRequest('http://localhost:3000/login');
     const response = await proxy(request as any);
     
     expect(NextResponse.redirect).toHaveBeenCalled();

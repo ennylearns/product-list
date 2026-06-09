@@ -16,8 +16,7 @@ vi.mock('next-auth/providers/credentials', () => ({
 }));
 
 // We mock db to prevent real DB queries during unit testing
-vi.mock('@/db', () => ({
-
+vi.mock('@/src/db', () => ({
   db: {
     select: vi.fn().mockReturnThis(),
     from: vi.fn().mockReturnThis(),
