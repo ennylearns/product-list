@@ -57,8 +57,11 @@ export async function createProduct(prevState: ProductFormState, formData: FormD
     return { message: 'Failed to create product. Please try again later.' };
   }
 
+  const hasImages = (validatedFields.data.images?.length ?? 0) > 0;
+  const hasDescription = !!validatedFields.data.description;
+
   revalidatePath('/dashboard/products');
-  redirect('/dashboard/products');
+  redirect(`/dashboard/products?event=product_added&has_images=${hasImages}&has_description=${hasDescription}`);
 }
 
 export async function getProducts() {

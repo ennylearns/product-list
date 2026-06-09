@@ -95,6 +95,7 @@ export default async function ProductDetailPage({ params }: Props) {
             <WhatsappOrderButton
               productName={product.name}
               productPriceFormatted={priceFormatted}
+              productPriceInCents={product.price}
               storeName={store.name}
               whatsappNumber={store.whatsappNumber}
               inStock={product.inStock}

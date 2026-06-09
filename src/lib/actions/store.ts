@@ -64,7 +64,7 @@ export async function setupStore(prevState: any, formData: FormData) {
     return { message: 'Failed to create store. Please try again later.' };
   }
 
-  redirect('/dashboard');
+  redirect('/dashboard?event=store_created');
 }
 
 export async function updateStore(prevState: any, formData: FormData) {

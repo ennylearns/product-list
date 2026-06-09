@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { AnalyticsEventEmitter } from "@/src/components/analytics-event-emitter";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,6 +19,8 @@ export const metadata: Metadata = {
   description: "Create a stunning storefront, manage your inventory, and receive orders directly to your WhatsApp.",
 };
 
+const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,7 +31,11 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <AnalyticsEventEmitter />
+      </body>
+      {gaId && <GoogleAnalytics gaId={gaId} />}
     </html>
   );
 }

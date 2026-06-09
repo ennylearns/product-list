@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react';
+import { trackEvent, GA_EVENTS } from '@/src/lib/analytics';
 
 type WhatsappOrderButtonProps = {
   productName: string;
   productPriceFormatted: string;
+  productPriceInCents: number;
   storeName: string;
   whatsappNumber: string;
   inStock: boolean;
@@ -13,6 +14,7 @@ type WhatsappOrderButtonProps = {
 export function WhatsappOrderButton({
   productName,
   productPriceFormatted,
+  productPriceInCents,
   storeName,
   whatsappNumber,
   inStock,
@@ -29,6 +31,13 @@ export function WhatsappOrderButton({
   }
 
   const handleOrderClick = () => {
+    trackEvent(GA_EVENTS.WHATSAPP_ORDER_CLICK, {
+      store_name: storeName,
+      product_name: productName,
+      price: productPriceInCents,
+      in_stock: inStock,
+    });
+
     const currentUrl = window.location.href;
     
     const messageTemplate = `Hello, I am interested in this product.

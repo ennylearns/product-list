@@ -38,7 +38,7 @@ export async function signup(state: FormState, formData: FormData) {
   }
 
   await signIn('credentials', { email, password, redirect: false });
-  redirect('/dashboard');
+  redirect('/dashboard?event=sign_up');
 }
 
 export async function signin(state: FormState, formData: FormData) {

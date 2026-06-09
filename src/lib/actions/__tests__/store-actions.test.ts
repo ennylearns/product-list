@@ -79,7 +79,7 @@ describe('Store Actions', () => {
 
       await setupStore(null, formData);
       expect(db.insert).toHaveBeenCalled();
-      expect(redirect).toHaveBeenCalledWith('/dashboard');
+      expect(redirect).toHaveBeenCalledWith('/dashboard?event=store_created');
     });
   });
 

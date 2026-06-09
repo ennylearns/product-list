@@ -66,7 +66,7 @@ describe('Product Actions', () => {
         })
       );
       expect(revalidatePath).toHaveBeenCalledWith('/dashboard/products');
-      expect(redirect).toHaveBeenCalledWith('/dashboard/products');
+      expect(redirect).toHaveBeenCalledWith('/dashboard/products?event=product_added&has_images=true&has_description=true');
     });
 
     it('returns validation errors for invalid input', async () => {

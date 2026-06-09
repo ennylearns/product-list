@@ -83,7 +83,7 @@ describe('Server Actions', () => {
 
       expect(db.insert).toHaveBeenCalled();
       expect(signIn).toHaveBeenCalledWith('credentials', { email: 'test@example.com', password: 'password123', redirect: false });
-      expect(redirect).toHaveBeenCalledWith('/dashboard');
+      expect(redirect).toHaveBeenCalledWith('/dashboard?event=sign_up');
     });
 
     it('should return conflict message on duplicate email', async () => {
