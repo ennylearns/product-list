@@ -10,6 +10,8 @@ type ProductImageCarouselProps = {
 
 export function ProductImageCarousel({ images, productName }: ProductImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   if (!images || images.length === 0) {
     return (
@@ -44,8 +46,38 @@ export function ProductImageCarousel({ images, productName }: ProductImageCarous
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
   };
 
+  const minSwipeDistance = 50;
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart === null || touchEnd === null) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      goToNext();
+    } else if (isRightSwipe) {
+      goToPrev();
+    }
+  };
+
   return (
-    <div className="relative w-full aspect-[4/5] md:aspect-auto md:min-h-[80vh] bg-[#F5F5F5] overflow-hidden group">
+    <div 
+      className="relative w-full aspect-[4/5] md:aspect-auto md:min-h-[80vh] bg-[#F5F5F5] overflow-hidden group touch-pan-y"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       {/* Images container */}
       <div 
         className="flex w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
@@ -66,10 +98,10 @@ export function ProductImageCarousel({ images, productName }: ProductImageCarous
       </div>
 
       {/* Navigation arrows */}
-      <div className="absolute inset-0 flex items-center justify-between p-4 md:p-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div className="absolute inset-0 flex items-center justify-between p-4 md:p-8 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
         <button 
-          onClick={goToPrev}
-          className="w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-md text-[#1A1A1A] rounded-full hover:bg-white transition-colors"
+          onClick={(e) => { e.stopPropagation(); goToPrev(); }}
+          className="w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-md text-[#1A1A1A] rounded-full hover:bg-white transition-colors pointer-events-auto"
           aria-label="Previous image"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -77,8 +109,8 @@ export function ProductImageCarousel({ images, productName }: ProductImageCarous
           </svg>
         </button>
         <button 
-          onClick={goToNext}
-          className="w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-md text-[#1A1A1A] rounded-full hover:bg-white transition-colors"
+          onClick={(e) => { e.stopPropagation(); goToNext(); }}
+          className="w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-md text-[#1A1A1A] rounded-full hover:bg-white transition-colors pointer-events-auto"
           aria-label="Next image"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
