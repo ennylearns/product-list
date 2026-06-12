@@ -29,5 +29,5 @@ A Store's unique, URL-safe identifier. Lowercase alphanumeric and hyphens only, 
 _Avoid_: Slug, handle
 
 **Product**:
-An item listed for sale within a Store. Has a name, price (in kobo), optional description, stock status, and up to 5 images.
+An item listed for sale within a Store. Has a name, price (in kobo), optional description, stock status, and up to 5 media items (images or videos).
 _Avoid_: Item, listing

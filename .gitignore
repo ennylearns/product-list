@@ -45,3 +45,4 @@ next-env.d.ts
 /docs/issues/*
 .agents/*
 skills-lock.json
+.codegraph/*
