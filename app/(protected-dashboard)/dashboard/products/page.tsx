@@ -58,12 +58,23 @@ export default async function ProductsPage() {
               className="group bg-white border border-slate-200 rounded-xl hover:shadow-xl hover:shadow-slate-200/50 hover:border-slate-300 transition-all duration-300 flex flex-col relative"
             >
               <div className="aspect-square bg-slate-100 relative border-b border-slate-100 group-hover:bg-slate-200 transition-colors rounded-t-xl overflow-hidden">
-                {product.images && product.images.length > 0 ? (
-                  <img 
-                    src={product.images[0]} 
-                    alt={product.name} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                {product.media && product.media.length > 0 ? (
+                  product.media[0].endsWith('.mp4') || product.media[0].endsWith('.webm') ? (
+                    <video 
+                      src={product.media[0]} 
+                      autoPlay 
+                      muted 
+                      loop 
+                      playsInline 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  ) : (
+                    <img 
+                      src={product.media[0]} 
+                      alt={product.name} 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  )
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center">
                     <svg className="w-12 h-12 text-slate-300 group-hover:text-slate-400 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">

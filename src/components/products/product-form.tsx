@@ -3,7 +3,7 @@
 import { useActionState, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { ProductFormState } from '@/src/lib/validations/product';
-import { ImageUpload } from '@/src/components/products/image-upload';
+import { MediaUpload } from '@/src/components/products/media-upload';
 
 interface ProductFormProps {
   initialData?: {
@@ -11,7 +11,7 @@ interface ProductFormProps {
     name: string;
     description: string | null;
     price: number; // in cents
-    images: string[];
+    media: string[];
     inStock: boolean;
   };
   action: (prevState: ProductFormState, formData: FormData) => Promise<ProductFormState>;
@@ -147,13 +147,13 @@ export function ProductForm({ initialData, action, submitLabel = 'Save Product' 
 
       <div className="space-y-1.5">
         <label className="block text-sm font-bold text-slate-700">
-          Product Images <span className="text-slate-400 font-normal">(Optional, up to 5)</span>
+          Product Media <span className="text-slate-400 font-normal">(Optional, up to 5 items)</span>
         </label>
-        <ImageUpload 
+        <MediaUpload 
           maxFiles={5}
           maxSizeMB={5}
-          error={state?.errors?.images?.[0]}
-          initialImages={initialData?.images || []}
+          error={state?.errors?.media?.[0]}
+          initialMedia={initialData?.media || []}
         />
       </div>
 

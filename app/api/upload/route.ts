@@ -29,8 +29,8 @@ export async function POST(request: Request): Promise<NextResponse> {
         }
 
         return {
-          allowedContentTypes: ['image/jpeg', 'image/png', 'image/webp'],
-          maximumSizeInBytes: 5 * 1024 * 1024, // 5MB limit
+          allowedContentTypes: ['image/jpeg', 'image/png', 'image/webp', 'video/mp4', 'video/webm'],
+          maximumSizeInBytes: 20 * 1024 * 1024, // 20MB limit for videos (client validates 5MB for images)
           validUntil: Date.now() + 5 * 60 * 1000, // Valid for 5 minutes
           tokenPayload: JSON.stringify({
             storeId: store.id,

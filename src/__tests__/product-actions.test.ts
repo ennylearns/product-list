@@ -68,7 +68,7 @@ vi.mock('../db/schema', () => ({
 describe('Product Actions', () => {
   const mockSession = { isAuth: true, userId: 1 };
   const mockStore = { id: 10, userId: 1 };
-  const mockProduct = { id: 100, storeId: 10, images: ['https://example.com/img1.jpg'] };
+  const mockProduct = { id: 100, storeId: 10, media: ['https://example.com/img1.jpg'] };
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -86,7 +86,7 @@ describe('Product Actions', () => {
       formData.append('name', 'Updated Product');
       formData.append('price', '25.50');
       formData.append('inStock', 'on');
-      formData.append('images', 'https://example.com/new.jpg');
+      formData.append('media', 'https://example.com/new.jpg');
 
       await updateProduct(100, {}, formData);
 

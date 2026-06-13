@@ -49,8 +49,8 @@ export default async function StorefrontPage({ params }: Props) {
             </div>
           ) : (
             products.map((product) => {
-              const hasImage = product.images && product.images.length > 0;
-              const imageUrl = hasImage ? product.images[0] : '';
+              const hasImage = product.media && product.media.length > 0;
+              const imageUrl = hasImage ? product.media[0] : '';
               const priceFormatted = new Intl.NumberFormat('en-NG', {
                 style: 'currency',
                 currency: 'NGN',

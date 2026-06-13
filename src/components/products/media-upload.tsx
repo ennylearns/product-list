@@ -3,52 +3,58 @@
 import { useState, useRef, useCallback } from 'react';
 import { upload } from '@vercel/blob/client';
 
-interface ImageUploadProps {
+interface MediaUploadProps {
   maxFiles?: number;
-  maxSizeMB?: number;
-  initialImages?: string[];
-  onImagesChange?: (urls: string[]) => void;
+  maxSizeMB?: number; // 5MB for images, hardcoded 20MB for videos
+  initialMedia?: string[];
+  onMediaChange?: (urls: string[]) => void;
   error?: string;
 }
 
-export function ImageUpload({ 
+export function MediaUpload({ 
   maxFiles = 5, 
   maxSizeMB = 5,
-  initialImages = [],
-  onImagesChange,
+  initialMedia = [],
+  onMediaChange,
   error 
-}: ImageUploadProps) {
-  const [images, setImages] = useState<string[]>(initialImages);
+}: MediaUploadProps) {
+  const [media, setMedia] = useState<string[]>(initialMedia);
   const [isDragging, setIsDragging] = useState(false);
   const [uploadingFiles, setUploadingFiles] = useState<{ id: string, name: string, progress: number }[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const notifyChange = useCallback((newImages: string[]) => {
-    setImages(newImages);
-    if (onImagesChange) {
-      onImagesChange(newImages);
+  const notifyChange = useCallback((newMedia: string[]) => {
+    setMedia(newMedia);
+    if (onMediaChange) {
+      onMediaChange(newMedia);
     }
-  }, [onImagesChange]);
+  }, [onMediaChange]);
 
   const handleFiles = async (files: FileList | File[]) => {
     const fileArray = Array.from(files);
     
     // Check remaining slots
-    const availableSlots = maxFiles - images.length - uploadingFiles.length;
+    const availableSlots = maxFiles - media.length - uploadingFiles.length;
     const filesToUpload = fileArray.slice(0, availableSlots);
     
     if (filesToUpload.length === 0) return;
     
     if (fileArray.length > availableSlots) {
-      alert(`You can only upload up to ${maxFiles} images. Only the first ${availableSlots} valid files will be uploaded.`);
+      alert(`You can only upload up to ${maxFiles} media items. Only the first ${availableSlots} valid files will be uploaded.`);
     }
 
     const validFiles = filesToUpload.filter(file => {
-      const isValidType = ['image/jpeg', 'image/png', 'image/webp'].includes(file.type);
-      const isValidSize = file.size <= maxSizeMB * 1024 * 1024;
+      const isImage = ['image/jpeg', 'image/png', 'image/webp'].includes(file.type);
+      const isVideo = ['video/mp4', 'video/webm'].includes(file.type);
+      const isValidType = isImage || isVideo;
       
-      if (!isValidType) alert(`${file.name} is not a valid image type (JPEG, PNG, WebP).`);
-      if (!isValidSize) alert(`${file.name} exceeds the ${maxSizeMB}MB limit.`);
+      const maxFileSizeBytes = isVideo ? 20 * 1024 * 1024 : maxSizeMB * 1024 * 1024;
+      const isValidSize = file.size <= maxFileSizeBytes;
+      
+      if (!isValidType) alert(`${file.name} is not a valid format (JPEG, PNG, WebP, MP4, WebM).`);
+      else if (!isValidSize) {
+        alert(`${file.name} exceeds the ${isVideo ? '20' : maxSizeMB}MB limit.`);
+      }
       
       return isValidType && isValidSize;
     });
@@ -75,10 +81,10 @@ export function ImageUpload({
           }
         });
         
-        setImages(prev => {
-          const newImages = [...prev, newBlob.url];
-          if (onImagesChange) onImagesChange(newImages);
-          return newImages;
+        setMedia(prev => {
+          const newMedia = [...prev, newBlob.url];
+          if (onMediaChange) onMediaChange(newMedia);
+          return newMedia;
         });
       } catch (err) {
         console.error('Upload failed for', item.name, err);
@@ -109,11 +115,11 @@ export function ImageUpload({
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       handleFiles(e.dataTransfer.files);
     }
-  }, [images.length, uploadingFiles.length]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [media.length, uploadingFiles.length]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const removeImage = (indexToRemove: number) => {
-    const newImages = images.filter((_, idx) => idx !== indexToRemove);
-    notifyChange(newImages);
+    const newMedia = media.filter((_, idx) => idx !== indexToRemove);
+    notifyChange(newMedia);
   };
 
   return (
@@ -126,7 +132,7 @@ export function ImageUpload({
             : error 
               ? 'border-red-300 bg-red-50/50 hover:bg-red-50 hover:border-red-400' 
               : 'border-slate-200 bg-slate-50 hover:bg-slate-100 hover:border-slate-300'}
-          ${images.length + uploadingFiles.length >= maxFiles ? 'opacity-50 pointer-events-none grayscale' : ''}
+          ${media.length + uploadingFiles.length >= maxFiles ? 'opacity-50 pointer-events-none grayscale' : ''}
         `}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
@@ -143,42 +149,57 @@ export function ImageUpload({
         </div>
         
         <h4 className={`text-base font-bold transition-colors duration-300 ${isDragging ? 'text-emerald-600' : 'text-slate-700'}`}>
-          {isDragging ? 'Drop images here' : 'Click or drag images to upload'}
+          {isDragging ? 'Drop files here' : 'Click or drag files to upload'}
         </h4>
         <p className="text-sm text-slate-500 mt-2 font-medium">
-          JPEG, PNG, WebP up to {maxSizeMB}MB
+          Images up to {maxSizeMB}MB, Videos up to 20MB
         </p>
         
         <input 
           ref={fileInputRef}
           type="file" 
           multiple 
-          accept="image/jpeg,image/png,image/webp"
+          accept="image/jpeg,image/png,image/webp,video/mp4,video/webm"
           className="hidden" 
+          data-testid="media-upload-input"
           onChange={(e) => e.target.files && handleFiles(e.target.files)}
-          disabled={images.length + uploadingFiles.length >= maxFiles}
+          disabled={media.length + uploadingFiles.length >= maxFiles}
         />
       </div>
 
       {error && <p className="text-sm font-medium text-rose-500">{error}</p>}
 
       {/* Gallery */}
-      {(images.length > 0 || uploadingFiles.length > 0) && (
+      {(media.length > 0 || uploadingFiles.length > 0) && (
         <div className="space-y-2">
           <div className="flex justify-between items-end mb-3">
             <h5 className="text-sm font-bold text-slate-900 tracking-tight">Gallery</h5>
             <span className="text-xs font-bold px-2.5 py-1 bg-slate-100 text-slate-600 rounded-lg">
-              {images.length + uploadingFiles.length} / {maxFiles}
+              {media.length + uploadingFiles.length} / {maxFiles}
             </span>
           </div>
           
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-            {images.map((url, idx) => (
+            {media.map((url, idx) => {
+              const isVideo = url.endsWith('.mp4') || url.endsWith('.webm');
+              return (
               <div key={url} className="group relative aspect-square rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shadow-sm animate-in zoom-in-95 duration-300">
-                <img src={url} alt={`Uploaded ${idx + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                {isVideo ? (
+                  <video 
+                    src={url} 
+                    data-testid={`video-preview-${idx}`} 
+                    autoPlay 
+                    muted 
+                    loop 
+                    playsInline 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                  />
+                ) : (
+                  <img src={url} alt={`Uploaded ${idx + 1}`} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                )}
                 
                 {/* Hidden input to pass to server action */}
-                <input type="hidden" name="images" value={url} />
+                <input type="hidden" name="media" value={url} />
                 
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
@@ -193,7 +214,7 @@ export function ImageUpload({
                   </svg>
                 </button>
               </div>
-            ))}
+            )})}
 
             {uploadingFiles.map(file => (
               <div key={file.id} className="relative aspect-square rounded-xl overflow-hidden bg-slate-50 border border-slate-200 shadow-inner flex flex-col items-center justify-center p-4">

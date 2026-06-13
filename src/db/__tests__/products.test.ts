@@ -10,7 +10,7 @@ describe('Product Schema', () => {
       description: 'Classic sneakers',
       price: 15000,
       inStock: true,
-      images: ['img1.jpg', 'img2.jpg'],
+      media: ['img1.jpg', 'video1.mp4'],
     }).toSQL();
 
     expect(query.sql).toContain('insert into "products"');
@@ -18,6 +18,6 @@ describe('Product Schema', () => {
     expect(query.sql).toContain('"name"');
     expect(query.sql).toContain('"price"');
     expect(query.sql).toContain('"inStock"');
-    expect(query.sql).toContain('"images"');
+    expect(query.sql).toContain('"media"');
   });
 });

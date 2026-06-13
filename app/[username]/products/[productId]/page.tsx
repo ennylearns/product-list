@@ -12,7 +12,7 @@ type Props = {
 export default async function ProductDetailPage({ params }: Props) {
   const { username, productId } = await params;
   const id = parseInt(productId, 10);
-  
+
   if (isNaN(id)) {
     notFound();
   }
@@ -24,8 +24,8 @@ export default async function ProductDetailPage({ params }: Props) {
   }
 
   const { store, product } = data;
-  const hasImages = product.images && product.images.length > 0;
-  
+  const hasImages = product.media && product.media.length > 0;
+
   const priceFormatted = new Intl.NumberFormat('en-NG', {
     style: 'currency',
     currency: 'NGN',
@@ -35,13 +35,13 @@ export default async function ProductDetailPage({ params }: Props) {
     <div className="min-h-screen bg-[#FDFBF7] text-[#1A1A1A] selection:bg-[#1A1A1A] selection:text-[#FDFBF7] flex flex-col">
       {/* Navigation Bar */}
       <nav className="w-full px-6 py-8 md:px-12 flex items-center justify-between z-10">
-        <Link 
+        <Link
           href={`/${username}`}
           className="text-2xl md:text-3xl font-medium tracking-tight hover:opacity-70 transition-opacity"
         >
           {store.name}
         </Link>
-        <Link 
+        <Link
           href={`/${username}`}
           className="text-xs uppercase tracking-[0.2em] font-medium border-b border-transparent hover:border-[#1A1A1A] transition-colors pb-1"
         >
@@ -50,10 +50,10 @@ export default async function ProductDetailPage({ params }: Props) {
       </nav>
 
       <main className="flex-1 w-full max-w-[1600px] mx-auto px-6 md:px-12 pb-24 flex flex-col lg:flex-row gap-16 lg:gap-24 relative">
-        
+
         {/* Left Column: Image Carousel */}
         <div className="w-full lg:w-3/5 xl:w-2/3 flex flex-col">
-          <ProductImageCarousel images={product.images || []} productName={product.name} />
+          <ProductImageCarousel images={product.media || []} productName={product.name} />
         </div>
 
         {/* Right Column: Product Details (Sticky) */}
@@ -100,7 +100,7 @@ export default async function ProductDetailPage({ params }: Props) {
               whatsappNumber={store.whatsappNumber}
               inStock={product.inStock}
             />
-            
+
             {/* Meta details */}
             <div className="mt-16 space-y-6 text-sm text-[#666666]">
               <div className="flex justify-between border-b border-[#E5E5E5] pb-4">
@@ -112,7 +112,7 @@ export default async function ProductDetailPage({ params }: Props) {
                 <span className="font-medium">#{product.id.toString().padStart(4, '0')}</span>
               </div>
             </div>
-            
+
           </div>
         </div>
       </main>

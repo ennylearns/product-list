@@ -19,7 +19,7 @@ export async function createProduct(prevState: ProductFormState, formData: FormD
     name: formData.get('name')?.toString(),
     description: formData.get('description')?.toString() || undefined,
     price: formData.get('price'),
-    images: formData.getAll('images').map((img) => img.toString()),
+    media: formData.getAll('media').map((img) => img.toString()),
   };
 
   const validatedFields = productSchema.safeParse(rawData);
@@ -50,18 +50,18 @@ export async function createProduct(prevState: ProductFormState, formData: FormD
       description: validatedFields.data.description || null,
       price: priceInCents,
       inStock: true,
-      images: validatedFields.data.images || [],
+      media: validatedFields.data.media || [],
     });
   } catch (error) {
     console.error('Error creating product:', error);
     return { message: 'Failed to create product. Please try again later.' };
   }
 
-  const hasImages = (validatedFields.data.images?.length ?? 0) > 0;
+  const hasMedia = (validatedFields.data.media?.length ?? 0) > 0;
   const hasDescription = !!validatedFields.data.description;
 
   revalidatePath('/dashboard/products');
-  redirect(`/dashboard/products?event=product_added&has_images=${hasImages}&has_description=${hasDescription}`);
+  redirect(`/dashboard/products?event=product_added&has_media=${hasMedia}&has_description=${hasDescription}`);
 }
 
 export async function getProducts() {
@@ -96,7 +96,7 @@ export async function updateProduct(id: number, prevState: ProductFormState, for
     name: formData.get('name')?.toString(),
     description: formData.get('description')?.toString() || undefined,
     price: formData.get('price'),
-    images: formData.getAll('images').map((img) => img.toString()),
+    media: formData.getAll('media').map((img) => img.toString()),
     inStock: formData.get('inStock') === 'on',
   };
 
@@ -134,7 +134,7 @@ export async function updateProduct(id: number, prevState: ProductFormState, for
       description: validatedFields.data.description || null,
       price: priceInCents,
       inStock: validatedFields.data.inStock !== undefined ? validatedFields.data.inStock : true,
-      images: validatedFields.data.images || [],
+      media: validatedFields.data.media || [],
     }).where(eq(products.id, id));
   } catch (error) {
     console.error('Error updating product:', error);
@@ -168,9 +168,9 @@ export async function deleteProduct(id: number): Promise<{ message: string; succ
   }
 
   try {
-    // Delete associated images from Vercel Blob
-    if (existingProduct.images && existingProduct.images.length > 0) {
-      await del(existingProduct.images);
+    // Delete associated media from Vercel Blob
+    if (existingProduct.media && existingProduct.media.length > 0) {
+      await del(existingProduct.media);
     }
 
     // Delete product from database

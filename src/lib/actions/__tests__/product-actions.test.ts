@@ -45,8 +45,8 @@ describe('Product Actions', () => {
       formData.append('name', 'Cool Sneaker');
       formData.append('description', 'A very cool sneaker');
       formData.append('price', '150.50');
-      formData.append('images', 'https://example.com/img1.jpg');
-      formData.append('images', 'https://example.com/img2.jpg');
+      formData.append('media', 'https://example.com/img1.jpg');
+      formData.append('media', 'https://example.com/img2.jpg');
 
       (db.query.stores.findFirst as any).mockResolvedValue({ id: 10 }); // Found store
 
@@ -62,11 +62,11 @@ describe('Product Actions', () => {
           name: 'Cool Sneaker',
           description: 'A very cool sneaker',
           price: 15050,
-          images: ['https://example.com/img1.jpg', 'https://example.com/img2.jpg'],
+          media: ['https://example.com/img1.jpg', 'https://example.com/img2.jpg'],
         })
       );
       expect(revalidatePath).toHaveBeenCalledWith('/dashboard/products');
-      expect(redirect).toHaveBeenCalledWith('/dashboard/products?event=product_added&has_images=true&has_description=true');
+      expect(redirect).toHaveBeenCalledWith('/dashboard/products?event=product_added&has_media=true&has_description=true');
     });
 
     it('returns validation errors for invalid input', async () => {
@@ -81,21 +81,21 @@ describe('Product Actions', () => {
       expect(db.insert).not.toHaveBeenCalled();
     });
 
-    it('returns validation error when more than 5 images are provided', async () => {
+    it('returns validation error when more than 5 media items are provided', async () => {
       const formData = new FormData();
       formData.append('name', 'Cool Sneaker');
       formData.append('price', '150.50');
-      formData.append('images', 'https://example.com/1.jpg');
-      formData.append('images', 'https://example.com/2.jpg');
-      formData.append('images', 'https://example.com/3.jpg');
-      formData.append('images', 'https://example.com/4.jpg');
-      formData.append('images', 'https://example.com/5.jpg');
-      formData.append('images', 'https://example.com/6.jpg'); // 6th image
+      formData.append('media', 'https://example.com/1.jpg');
+      formData.append('media', 'https://example.com/2.jpg');
+      formData.append('media', 'https://example.com/3.jpg');
+      formData.append('media', 'https://example.com/4.jpg');
+      formData.append('media', 'https://example.com/5.jpg');
+      formData.append('media', 'https://example.com/6.jpg'); // 6th media item
 
       const response = await createProduct(undefined, formData);
 
-      expect(response?.errors?.images).toBeDefined();
-      expect(response?.errors?.images?.[0]).toMatch(/maximum of 5 images/);
+      expect(response?.errors?.media).toBeDefined();
+      expect(response?.errors?.media?.[0]).toMatch(/maximum of 5 media items/);
       expect(db.insert).not.toHaveBeenCalled();
     });
 
