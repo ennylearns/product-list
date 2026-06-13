@@ -1,19 +1,54 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 
-type ProductImageCarouselProps = {
-  images: string[];
+type ProductMediaCarouselProps = {
+  media: string[];
   productName: string;
 };
 
-export function ProductImageCarousel({ images, productName }: ProductImageCarouselProps) {
+const isVideo = (url: string) => {
+  if (!url) return false;
+  const lowerUrl = url.toLowerCase();
+  return lowerUrl.endsWith('.mp4') || lowerUrl.endsWith('.webm');
+};
+
+function VideoSlide({ src, isActive }: { src: string; isActive: boolean }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    
+    if (isActive) {
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    } else {
+      videoRef.current.pause();
+    }
+  }, [isActive]);
+
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      className="absolute inset-0 w-full h-full object-cover object-center"
+      autoPlay={isActive}
+      loop
+      muted
+      playsInline
+    />
+  );
+}
+
+export function ProductMediaCarousel({ media, productName }: ProductMediaCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
-  if (!images || images.length === 0) {
+  if (!media || media.length === 0) {
     return (
       <div className="relative w-full aspect-[4/5] md:min-h-[80vh] bg-[#F5F5F5] flex items-center justify-center border border-[#E5E5E5]">
         <svg className="w-24 h-24 text-[#D4D4D4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -23,27 +58,32 @@ export function ProductImageCarousel({ images, productName }: ProductImageCarous
     );
   }
 
-  if (images.length === 1) {
+  if (media.length === 1) {
+    const isVideoItem = isVideo(media[0]);
     return (
       <div className="relative w-full aspect-[4/5] md:aspect-auto md:min-h-[80vh] bg-[#F5F5F5]">
-        <Image
-          src={images[0]}
-          alt={productName}
-          fill
-          className="object-cover object-center"
-          sizes="(min-width: 1024px) 66vw, 100vw"
-          priority
-        />
+        {isVideoItem ? (
+          <VideoSlide src={media[0]} isActive={true} />
+        ) : (
+          <Image
+            src={media[0]}
+            alt={productName}
+            fill
+            className="object-cover object-center"
+            sizes="(min-width: 1024px) 66vw, 100vw"
+            priority
+          />
+        )}
       </div>
     );
   }
 
   const goToNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+    setCurrentIndex((prevIndex) => (prevIndex === media.length - 1 ? 0 : prevIndex + 1));
   };
 
   const goToPrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? media.length - 1 : prevIndex - 1));
   };
 
   const minSwipeDistance = 50;
@@ -83,18 +123,25 @@ export function ProductImageCarousel({ images, productName }: ProductImageCarous
         className="flex w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {images.map((img, idx) => (
-          <div key={idx} className="relative w-full h-full flex-shrink-0">
-            <Image
-              src={img}
-              alt={`${productName} - View ${idx + 1}`}
-              fill
-              className="object-cover object-center"
-              sizes="(min-width: 1024px) 66vw, 100vw"
-              priority={idx === 0}
-            />
-          </div>
-        ))}
+        {media.map((item, idx) => {
+          const isVideoItem = isVideo(item);
+          return (
+            <div key={idx} className="relative w-full h-full flex-shrink-0">
+              {isVideoItem ? (
+                <VideoSlide src={item} isActive={currentIndex === idx} />
+              ) : (
+                <Image
+                  src={item}
+                  alt={`${productName} - View ${idx + 1}`}
+                  fill
+                  className="object-cover object-center"
+                  sizes="(min-width: 1024px) 66vw, 100vw"
+                  priority={idx === 0}
+                />
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {/* Navigation arrows */}
@@ -121,7 +168,7 @@ export function ProductImageCarousel({ images, productName }: ProductImageCarous
 
       {/* Dot indicators */}
       <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-3">
-        {images.map((_, idx) => (
+        {media.map((_, idx) => (
           <button
             key={idx}
             onClick={() => setCurrentIndex(idx)}
@@ -137,3 +184,4 @@ export function ProductImageCarousel({ images, productName }: ProductImageCarous
     </div>
   );
 }
+

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getProductDetails } from '@/src/lib/data/storefront';
 import { WhatsappOrderButton } from '@/src/components/whatsapp-order-button';
-import { ProductImageCarousel } from '@/src/components/products/product-image-carousel';
+import { ProductMediaCarousel } from '@/src/components/products/product-media-carousel';
 
 type Props = {
   params: Promise<{ username: string; productId: string }>;
@@ -53,7 +53,7 @@ export default async function ProductDetailPage({ params }: Props) {
 
         {/* Left Column: Image Carousel */}
         <div className="w-full lg:w-3/5 xl:w-2/3 flex flex-col">
-          <ProductImageCarousel images={product.media || []} productName={product.name} />
+          <ProductMediaCarousel media={product.media || []} productName={product.name} />
         </div>
 
         {/* Right Column: Product Details (Sticky) */}
