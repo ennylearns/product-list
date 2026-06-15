@@ -27,7 +27,7 @@ export function CopyStoreLinkBanner({ username }: { username: string }) {
   };
 
   return (
-    <div className="bg-fuchsia-300 p-6 md:p-8 border-2 border-slate-900 shadow-[6px_6px_0px_0px_#0f172a] relative overflow-hidden group">
+    <div className="bg-emerald-300 p-6 md:p-8 border-2 border-slate-900 shadow-[6px_6px_0px_0px_#0f172a] relative overflow-hidden group">
       <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div>
           <h2 className={`${bricolage.className} text-2xl font-black uppercase tracking-tight text-slate-900 mb-2`}>
@@ -59,7 +59,7 @@ export function CopyStoreLinkBanner({ username }: { username: string }) {
         </button>
       </div>
       {/* Decorative background element */}
-      <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-fuchsia-400 rounded-full blur-3xl opacity-50 group-hover:scale-110 transition-transform duration-500"></div>
+      <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-emerald-400 rounded-full blur-3xl opacity-50 group-hover:scale-110 transition-transform duration-500"></div>
     </div>
   );
 }
