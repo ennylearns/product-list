@@ -105,7 +105,7 @@ export default async function ProductsPage() {
                 </p>
                 <div className="mt-3 pt-3 sm:mt-4 sm:pt-4 border-t border-slate-100 flex items-center justify-between relative z-10">
                   <span className="text-base sm:text-lg font-black text-slate-900 tracking-tight">
-                    ₦{(product.price / 100).toFixed(2)}
+                    ₦{(product.price / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </span>
                   <ProductCardActions productId={product.id} inStock={product.inStock} />
                 </div>

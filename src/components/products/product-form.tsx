@@ -49,6 +49,26 @@ export function ProductForm({ initialData, action, submitLabel = 'Save Product' 
   // Local state for stock toggle
   const [inStock, setInStock] = useState(initialData ? initialData.inStock : true);
 
+  // Local state for price formatting
+  const [displayPrice, setDisplayPrice] = useState(() => {
+    if (!initialData) return '';
+    const priceStr = (initialData.price / 100).toString();
+    const parts = priceStr.split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return parts.join('.');
+  });
+
+  const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/[^0-9.]/g, '');
+    const parts = val.split('.');
+    if (parts.length > 2) {
+      val = parts[0] + '.' + parts.slice(1).join('');
+    }
+    const formattedParts = val.split('.');
+    formattedParts[0] = formattedParts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    setDisplayPrice(formattedParts.join('.'));
+  };
+
   return (
     <form action={formAction} className="space-y-6">
       {state?.message && (
@@ -81,7 +101,7 @@ export function ProductForm({ initialData, action, submitLabel = 'Save Product' 
       </div>
 
       <div className="space-y-1.5">
-        <label htmlFor="price" className="block text-sm font-bold text-slate-700">
+        <label htmlFor="price-display" className="block text-sm font-bold text-slate-700">
           Price (NGN) <span className="text-rose-500">*</span>
         </label>
         <div className="relative">
@@ -89,17 +109,21 @@ export function ProductForm({ initialData, action, submitLabel = 'Save Product' 
             <span className="text-slate-500 font-bold">₦</span>
           </div>
           <input
-            id="price"
-            name="price"
-            type="number"
-            step="0.01"
-            min="0"
-            defaultValue={initialData ? (initialData.price / 100).toFixed(2) : undefined}
+            id="price-display"
+            type="text"
+            inputMode="decimal"
+            value={displayPrice}
+            onChange={handlePriceChange}
             placeholder="0.00"
             className={`w-full pl-8 pr-5 py-3 rounded-2xl border ${
               state?.errors?.price ? 'border-red-300 ring-red-100' : 'border-slate-200'
             } bg-slate-50 focus:bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 transition-all`}
             required
+          />
+          <input
+            type="hidden"
+            name="price"
+            value={displayPrice.replace(/,/g, '')}
           />
         </div>
         {state?.errors?.price && (
