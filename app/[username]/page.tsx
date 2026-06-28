@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getStorefrontData } from '@/src/lib/data/storefront';
+import { formatPrice } from '@/src/lib/formatters';
 // Since the Next.js router params are asynchronous in later Next.js 15+ versions, 
 // we should define the Page component appropriately. Next.js 15 allows `params` to be a Promise.
 // But based on package.json, we are on Next 15 (next 16 doesn't exist, it said 16.2.7 in package.json? Wait, package.json says "next": "16.2.7"? 15.x is current, maybe it's a futuristic version. Let's use standard Next.js async page syntax).
@@ -52,10 +53,7 @@ export default async function StorefrontPage({ params }: Props) {
               const hasImage = product.media && product.media.length > 0;
               const imageUrl = hasImage ? product.media[0] : '';
               const isVideoMedia = hasImage && (imageUrl.toLowerCase().endsWith('.mp4') || imageUrl.toLowerCase().endsWith('.webm'));
-              const priceFormatted = new Intl.NumberFormat('en-NG', {
-                style: 'currency',
-                currency: 'NGN',
-              }).format(product.price / 100);
+              const priceFormatted = formatPrice(product.price, store.currency || 'NGN');
 
               return (
                 <Link

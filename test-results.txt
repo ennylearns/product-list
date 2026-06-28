@@ -1,0 +1,95 @@
+﻿
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.8 [39m[90mC:/Users/HP/Desktop/PROJECTS/product-list[39m
+
+ [32mΓ£ô[39m src/lib/actions/__tests__/store-actions.test.ts[2m > [22mStore Actions[2m > [22msetupStore[2m > [22mshould fail if unauthenticated[32m 69[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/actions/__tests__/store-actions.test.ts[2m > [22mStore Actions[2m > [22msetupStore[2m > [22mshould validate input fields[32m 12[2mms[22m[39m
+ [31m├ù[39m src/lib/actions/__tests__/store-actions.test.ts[2m > [22mStore Actions[2m > [22msetupStore[2m > [22mshould fail if user already has a store[32m 28[2mms[22m[39m
+[31m   ΓåÆ expected { ΓÇª(2) } to deeply equal { Object (message) }[39m
+ [31m├ù[39m src/lib/actions/__tests__/store-actions.test.ts[2m > [22mStore Actions[2m > [22msetupStore[2m > [22mshould succeed and redirect when data is valid[32m 7[2mms[22m[39m
+[31m   ΓåÆ expected "vi.fn()" to be called at least once[39m
+ [31m├ù[39m src/lib/actions/__tests__/store-actions.test.ts[2m > [22mStore Actions[2m > [22mupdateStore[2m > [22mshould fail if store not found[32m 4[2mms[22m[39m
+[31m   ΓåÆ expected { ΓÇª(2) } to deeply equal { message: 'Store not found.' }[39m
+ [31m├ù[39m src/lib/actions/__tests__/store-actions.test.ts[2m > [22mStore Actions[2m > [22mupdateStore[2m > [22mshould succeed and revalidate paths[32m 2[2mms[22m[39m
+[31m   ΓåÆ expected "vi.fn()" to be called at least once[39m
+ [32mΓ£ô[39m src/lib/actions/__tests__/product-actions.test.ts[2m > [22mProduct Actions[2m > [22mcreateProduct[2m > [22mcreates a product successfully and converts price to cents[32m 59[2mms[22m[39m
+ [31m├ù[39m src/lib/actions/__tests__/product-actions.test.ts[2m > [22mProduct Actions[2m > [22mcreateProduct[2m > [22mreturns validation errors for invalid input[32m 12[2mms[22m[39m
+[31m   ΓåÆ expected undefined to be defined[39m
+ [31m├ù[39m src/lib/actions/__tests__/product-actions.test.ts[2m > [22mProduct Actions[2m > [22mcreateProduct[2m > [22mreturns validation error when more than 5 media items are provided[32m 2[2mms[22m[39m
+[31m   ΓåÆ expected undefined to be defined[39m
+ [31m├ù[39m src/lib/actions/__tests__/product-actions.test.ts[2m > [22mProduct Actions[2m > [22mcreateProduct[2m > [22mreturns an error if store is not found[32m 14[2mms[22m[39m
+[31m   ΓåÆ expected 'Not authenticated or Store not found.' to be 'Store not found. Please create a storΓÇª' // Object.is equality[39m
+ [32mΓ£ô[39m src/lib/actions/__tests__/product-actions.test.ts[2m > [22mProduct Actions[2m > [22mgetProducts[2m > [22mreturns products for the authenticated user store[32m 4[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/actions/__tests__/product-actions.test.ts[2m > [22mProduct Actions[2m > [22mgetProducts[2m > [22mreturns empty array if unauthenticated[32m 4[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/actions/__tests__/product-actions.test.ts[2m > [22mProduct Actions[2m > [22mgetProducts[2m > [22mreturns empty array if no store is found[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/product-actions.test.ts[2m > [22mProduct Actions[2m > [22mupdateProduct[2m > [22mshould validate input and update the product[32m 155[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/product-actions.test.ts[2m > [22mProduct Actions[2m > [22mupdateProduct[2m > [22mshould return validation errors for invalid input[32m 8[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/product-actions.test.ts[2m > [22mProduct Actions[2m > [22mdeleteProduct[2m > [22mshould delete product and its images from vercel blob[32m 3[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/product-actions.test.ts[2m > [22mProduct Actions[2m > [22mdeleteProduct[2m > [22mshould fail if product does not belong to store[32m 22[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/product-actions.test.ts[2m > [22mProduct Actions[2m > [22mtoggleProductStock[2m > [22mshould toggle stock status[32m 5[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/actions.test.ts[2m > [22mServer Actions[2m > [22msignup action[2m > [22mshould return validation errors if data is invalid[32m 61[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/actions.test.ts[2m > [22mServer Actions[2m > [22msignup action[2m > [22mshould insert user and sign in when data is valid[32m 8[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/actions.test.ts[2m > [22mServer Actions[2m > [22msignup action[2m > [22mshould return conflict message on duplicate email[32m 4[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/actions.test.ts[2m > [22mServer Actions[2m > [22msignin action[2m > [22mshould return validation errors if data is invalid[32m 2[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/actions.test.ts[2m > [22mServer Actions[2m > [22msignin action[2m > [22mshould sign in and redirect on success[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/actions.test.ts[2m > [22mServer Actions[2m > [22msignin action[2m > [22mshould return invalid credentials message on CredentialsSignin error[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/actions.test.ts[2m > [22mServer Actions[2m > [22msignin action[2m > [22mshould rethrow unknown errors[32m 31[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/actions.test.ts[2m > [22mServer Actions[2m > [22msignout action[2m > [22mshould call signOut[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/formatters.test.ts[2m > [22mformatPrice[2m > [22mformats NGN currency correctly[32m 62[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/formatters.test.ts[2m > [22mformatPrice[2m > [22mformats USD currency correctly[32m 24[2mms[22m[39m
+ [32mΓ£ô[39m src/components/products/__tests__/product-media-carousel.test.tsx[2m > [22mProductMediaCarousel[2m > [22mrenders standard image URLs using img tags[33m 760[2mms[22m[39m
+ [32mΓ£ô[39m src/components/products/__tests__/product-media-carousel.test.tsx[2m > [22mProductMediaCarousel[2m > [22mrenders video tags with correct attributes for .mp4 and .webm URLs[32m 40[2mms[22m[39m
+ [32mΓ£ô[39m src/components/products/__tests__/product-media-carousel.test.tsx[2m > [22mProductMediaCarousel[2m > [22mplays the active video and pauses inactive videos[32m 62[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/validations.test.ts[2m > [22mValidation Schemas[2m > [22mSignupFormSchema[2m > [22mshould validate correctly with valid data[32m 10[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/validations.test.ts[2m > [22mValidation Schemas[2m > [22mSignupFormSchema[2m > [22mshould fail if email is invalid[32m 2[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/validations.test.ts[2m > [22mValidation Schemas[2m > [22mSignupFormSchema[2m > [22mshould fail if password is too short[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/validations.test.ts[2m > [22mValidation Schemas[2m > [22mSignupFormSchema[2m > [22mshould fail if password has no letter[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/validations.test.ts[2m > [22mValidation Schemas[2m > [22mSignupFormSchema[2m > [22mshould fail if password has no number[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/validations.test.ts[2m > [22mValidation Schemas[2m > [22mSignupFormSchema[2m > [22mshould fail if passwords do not match[32m 2[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/validations.test.ts[2m > [22mValidation Schemas[2m > [22mSigninFormSchema[2m > [22mshould validate correctly with valid data[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/validations.test.ts[2m > [22mValidation Schemas[2m > [22mSigninFormSchema[2m > [22mshould fail if email is empty[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/validations.test.ts[2m > [22mValidation Schemas[2m > [22mSigninFormSchema[2m > [22mshould fail if password is empty[32m 3[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/dashboard.test.ts[2m > [22mgetDashboardStats[2m > [22mshould return 0 counts if store does not exist[32m 11[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/dashboard.test.ts[2m > [22mgetDashboardStats[2m > [22mshould return correct counts when store exists and has products[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/dashboard.test.ts[2m > [22mgetDashboardStats[2m > [22mshould return 0 counts when store exists but has no products[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/seller-catalog.test.ts[2m > [22mSellerCatalog[2m > [22mfromSession[2m > [22mreturns null if no session[32m 10[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/seller-catalog.test.ts[2m > [22mSellerCatalog[2m > [22mfromSession[2m > [22mreturns null if no store for session user[32m 4[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/seller-catalog.test.ts[2m > [22mSellerCatalog[2m > [22mfromSession[2m > [22mreturns instantiated SellerCatalog with storeId and currency if valid[32m 2[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/seller-catalog.test.ts[2m > [22mSellerCatalog[2m > [22mcreateProduct[2m > [22minserts a product with storeId and defaults[32m 8[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/seller-catalog.test.ts[2m > [22mSellerCatalog[2m > [22mgetProducts[2m > [22mreturns products for the store[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/seller-catalog.test.ts[2m > [22mSellerCatalog[2m > [22mupdateProduct[2m > [22mupdates a product belonging to the store[32m 2[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/seller-catalog.test.ts[2m > [22mSellerCatalog[2m > [22mdeleteProduct[2m > [22mdeletes a product[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/seller-catalog.test.ts[2m > [22mSellerCatalog[2m > [22mtoggleProductStock[2m > [22mtoggles product stock[32m 3[2mms[22m[39m
+ [32mΓ£ô[39m src/components/products/__tests__/media-upload.test.tsx[2m > [22mMediaUpload Component[2m > [22mshould render initial media including a video and an image[32m 127[2mms[22m[39m
+ [32mΓ£ô[39m src/components/products/__tests__/media-upload.test.tsx[2m > [22mMediaUpload Component[2m > [22mshould reject video files larger than 20MB[33m 375[2mms[22m[39m
+ [32mΓ£ô[39m src/components/products/__tests__/media-upload.test.tsx[2m > [22mMediaUpload Component[2m > [22mshould reject image files larger than 5MB[33m 301[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/storefront.test.ts[2m > [22mgetStorefrontData[2m > [22mshould return store and products if store exists[32m 19[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/storefront.test.ts[2m > [22mgetStorefrontData[2m > [22mshould return null if store does not exist[32m 3[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/storefront.test.ts[2m > [22mgetProductDetails[2m > [22mshould return store and product if both exist and product belongs to store[32m 30[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/storefront.test.ts[2m > [22mgetProductDetails[2m > [22mshould return null if store does not exist[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/storefront.test.ts[2m > [22mgetProductDetails[2m > [22mshould return null if product does not exist[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/dal.test.ts[2m > [22mverifySession[2m > [22mshould redirect if no session[32m 13[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/dal.test.ts[2m > [22mverifySession[2m > [22mshould redirect if no user in session[32m 2[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/dal.test.ts[2m > [22mverifySession[2m > [22mshould redirect if no userId in session[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/dal.test.ts[2m > [22mverifySession[2m > [22mshould return session info if user is authenticated[32m 2[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/auth.test.ts[2m > [22mAuth Authorize Callback[2m > [22mshould return user if email exists and password matches[32m 22[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/auth.test.ts[2m > [22mAuth Authorize Callback[2m > [22mshould return null if user does not exist[32m 3[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/auth.test.ts[2m > [22mAuth Authorize Callback[2m > [22mshould return null if password does not match[32m 2[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/proxy.test.ts[2m > [22mProxy[2m > [22mshould redirect unauthenticated users away from protected routes[32m 7[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/proxy.test.ts[2m > [22mProxy[2m > [22mshould redirect authenticated users away from auth routes[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/proxy.test.ts[2m > [22mProxy[2m > [22mshould allow authenticated users to access protected routes[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/__tests__/proxy.test.ts[2m > [22mProxy[2m > [22mshould allow unauthenticated users to access public routes[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/analytics.test.ts[2m > [22mAnalytics utility[2m > [22mGA_EVENTS[2m > [22mshould define all expected event names[32m 6[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/analytics.test.ts[2m > [22mAnalytics utility[2m > [22mtrackEvent[2m > [22mshould delegate to sendGAEvent with correct arguments[32m 4[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/analytics.test.ts[2m > [22mAnalytics utility[2m > [22mtrackEvent[2m > [22mshould pass empty params when none provided[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/analytics.test.ts[2m > [22mAnalytics utility[2m > [22mtrackEvent[2m > [22mshould pass product_added event with boolean params[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/lib/__tests__/analytics.test.ts[2m > [22mAnalytics utility[2m > [22mtrackEvent[2m > [22mshould pass whatsapp_order_click event with all params[32m 1[2mms[22m[39m
+ [32mΓ£ô[39m src/db/__tests__/db.test.ts[2m > [22mDatabase Connection[2m > [22mshould be able to execute a basic query[32m 11[2mms[22m[39m
+ [32mΓ£ô[39m src/db/__tests__/stores.test.ts[2m > [22mStore Schema[2m > [22mshould generate valid insert SQL with required fields[32m 9[2mms[22m[39m
+ [32mΓ£ô[39m src/db/__tests__/users.test.ts[2m > [22mUser Schema[2m > [22mshould generate valid insert SQL with required fields[32m 13[2mms[22m[39m
+ [32mΓ£ô[39m src/db/__tests__/products.test.ts[2m > [22mProduct Schema[2m > [22mshould generate valid insert SQL with required fields[32m 8[2mms[22m[39m
+
+[2m Test Files [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m17 passed[39m[22m[90m (19)[39m
+[2m      Tests [22m [1m[31m7 failed[39m[22m[2m | [22m[1m[32m72 passed[39m[22m[90m (79)[39m
+[2m   Start at [22m 03:02:30
+[2m   Duration [22m 32.31s[2m (transform 1.35s, setup 0ms, import 44.74s, tests 2.62s, environment 20.03s)[22m
+

@@ -62,6 +62,7 @@ describe('Store Actions', () => {
       formData.set('name', 'My Store');
       formData.set('username', 'mystore');
       formData.set('whatsappNumber', '+1234567890');
+      formData.set('currency', 'NGN');
 
       (db.query.stores.findFirst as any).mockResolvedValueOnce({ id: 1 }); // User has store
 
@@ -74,6 +75,7 @@ describe('Store Actions', () => {
       formData.set('name', 'My Store');
       formData.set('username', 'mystore');
       formData.set('whatsappNumber', '+1234567890');
+      formData.set('currency', 'NGN');
 
       (db.query.stores.findFirst as any).mockResolvedValue(null); // No existing store or username
 
@@ -89,6 +91,7 @@ describe('Store Actions', () => {
       formData.set('name', 'My Store');
       formData.set('username', 'mystore');
       formData.set('whatsappNumber', '+1234567890');
+      formData.set('currency', 'NGN');
 
       (db.query.stores.findFirst as any).mockResolvedValueOnce(null); // No store found
 
@@ -101,6 +104,7 @@ describe('Store Actions', () => {
       formData.set('name', 'New Store Name');
       formData.set('username', 'newstore');
       formData.set('whatsappNumber', '+1234567890');
+      formData.set('currency', 'NGN');
 
       // mock current store
       (db.query.stores.findFirst as any).mockResolvedValueOnce({ id: 1, userId: 1 }); 

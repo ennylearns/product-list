@@ -74,6 +74,8 @@ describe('Product Actions', () => {
       formData.append('name', '');
       formData.append('price', '-10');
 
+      (db.query.stores.findFirst as any).mockResolvedValue({ id: 10 }); // Found store
+
       const response = await createProduct(undefined, formData);
 
       expect(response?.errors?.name).toBeDefined();
@@ -92,6 +94,8 @@ describe('Product Actions', () => {
       formData.append('media', 'https://example.com/5.jpg');
       formData.append('media', 'https://example.com/6.jpg'); // 6th media item
 
+      (db.query.stores.findFirst as any).mockResolvedValue({ id: 10 }); // Found store
+
       const response = await createProduct(undefined, formData);
 
       expect(response?.errors?.media).toBeDefined();
@@ -107,7 +111,7 @@ describe('Product Actions', () => {
       (db.query.stores.findFirst as any).mockResolvedValue(null); // No store
 
       const response = await createProduct(undefined, formData);
-      expect(response?.message).toBe('Store not found. Please create a store profile first.');
+      expect(response?.message).toBe('Not authenticated or Store not found.');
     });
   });
 

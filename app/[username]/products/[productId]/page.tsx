@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { getProductDetails } from '@/src/lib/data/storefront';
 import { WhatsappOrderButton } from '@/src/components/whatsapp-order-button';
 import { ProductMediaCarousel } from '@/src/components/products/product-media-carousel';
+import { formatPrice } from '@/src/lib/formatters';
 
 type Props = {
   params: Promise<{ username: string; productId: string }>;
@@ -26,10 +27,7 @@ export default async function ProductDetailPage({ params }: Props) {
   const { store, product } = data;
   const hasImages = product.media && product.media.length > 0;
 
-  const priceFormatted = new Intl.NumberFormat('en-NG', {
-    style: 'currency',
-    currency: 'NGN',
-  }).format(product.price / 100);
+  const priceFormatted = formatPrice(product.price, store.currency || 'NGN');
 
   return (
     <div className="min-h-screen bg-[#FDFBF7] text-[#1A1A1A] selection:bg-[#1A1A1A] selection:text-[#FDFBF7] flex flex-col">
