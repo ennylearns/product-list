@@ -85,6 +85,18 @@ export default async function DashboardPage() {
           </span>
           <div className="absolute inset-0 h-full w-0 bg-emerald-500 transition-all duration-300 ease-out group-hover:w-full z-0"></div>
         </Link>
+        <Link 
+          href="/dashboard/settings"
+          className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-5 bg-amber-300 text-slate-900 font-bold uppercase tracking-widest overflow-hidden border-2 border-slate-900 shadow-[6px_6px_0px_0px_#0f172a] hover:shadow-[2px_2px_0px_0px_#0f172a] hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
+        >
+          <span className="relative z-10 flex items-center gap-3">
+            Store Settings
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 group-hover:rotate-90 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </span>
+        </Link>
         {stats.username && (
           <Link 
             href={`/${stats.username}`}

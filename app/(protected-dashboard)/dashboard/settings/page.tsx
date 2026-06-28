@@ -28,6 +28,7 @@ export default async function SettingsPage() {
         username: userStore.username,
         whatsappNumber: userStore.whatsappNumber,
         description: userStore.description,
+        currency: userStore.currency as "NGN" | "USD",
       }} />
     </div>
   );

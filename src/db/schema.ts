@@ -18,6 +18,7 @@ export const stores = pgTable('stores', {
   username: text('username').notNull().unique(),
   whatsappNumber: text('whatsappNumber').notNull(),
   description: text('description'),
+  currency: text('currency').notNull().default('NGN'),
   createdAt: timestamp('createdAt').notNull().defaultNow(),
   updatedAt: timestamp('updatedAt').notNull().defaultNow(),
 });

@@ -19,6 +19,7 @@ export async function setupStore(prevState: any, formData: FormData) {
     username: formData.get('username') as string,
     whatsappNumber: formData.get('whatsappNumber') as string,
     description: formData.get('description') as string,
+    currency: formData.get('currency') as string,
   };
 
   const validatedFields = storeSchema.safeParse(rawData);
@@ -58,6 +59,7 @@ export async function setupStore(prevState: any, formData: FormData) {
       username: validatedFields.data.username,
       whatsappNumber: validatedFields.data.whatsappNumber,
       description: validatedFields.data.description || null,
+      currency: validatedFields.data.currency,
     });
   } catch (error) {
     console.error('Error creating store:', error);
@@ -78,6 +80,7 @@ export async function updateStore(prevState: any, formData: FormData) {
     username: formData.get('username') as string,
     whatsappNumber: formData.get('whatsappNumber') as string,
     description: formData.get('description') as string,
+    currency: formData.get('currency') as string,
   };
 
   const validatedFields = storeSchema.safeParse(rawData);
@@ -120,6 +123,7 @@ export async function updateStore(prevState: any, formData: FormData) {
         username: validatedFields.data.username,
         whatsappNumber: validatedFields.data.whatsappNumber,
         description: validatedFields.data.description || null,
+        currency: validatedFields.data.currency,
         updatedAt: new Date(),
       })
       .where(eq(stores.id, currentStore.id));

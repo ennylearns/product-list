@@ -9,7 +9,7 @@ import { del } from '@vercel/blob';
 export type ValidatedProductData = z.infer<typeof productSchema>;
 
 export class SellerCatalog {
-  constructor(public readonly storeId: number) {}
+  constructor(public readonly storeId: number, public readonly currency: string = 'NGN') {}
 
   static async fromSession(): Promise<SellerCatalog | null> {
     const session = await verifySession();
@@ -25,7 +25,7 @@ export class SellerCatalog {
       return null;
     }
 
-    return new SellerCatalog(currentStore.id);
+    return new SellerCatalog(currentStore.id, currentStore.currency);
   }
 
   async createProduct(data: ValidatedProductData) {

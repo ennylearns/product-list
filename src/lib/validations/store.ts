@@ -11,6 +11,7 @@ export const storeSchema = z.object({
     .string()
     .regex(/^\+[1-9]\d{1,14}$/, 'WhatsApp number must be in valid international E.164 format (e.g., +234...)'),
   description: z.string().max(500, 'Description is too long').optional().nullable(),
+  currency: z.enum(['NGN', 'USD']).default('NGN'),
 });
 
 export type StoreInput = z.infer<typeof storeSchema>;

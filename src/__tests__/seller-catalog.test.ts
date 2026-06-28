@@ -68,13 +68,14 @@ describe('SellerCatalog', () => {
       expect(catalog).toBeNull();
     });
 
-    it('returns instantiated SellerCatalog with storeId if valid', async () => {
+    it('returns instantiated SellerCatalog with storeId and currency if valid', async () => {
       vi.mocked(verifySession).mockResolvedValue({ isAuth: true, userId: 1 });
-      dbMock.query.stores.findFirst.mockResolvedValue({ id: 10, userId: 1 });
+      dbMock.query.stores.findFirst.mockResolvedValue({ id: 10, userId: 1, currency: 'USD' });
       
       const catalog = await SellerCatalog.fromSession();
       expect(catalog).toBeInstanceOf(SellerCatalog);
       expect(catalog?.storeId).toBe(10);
+      expect(catalog?.currency).toBe('USD');
     });
   });
 

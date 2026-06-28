@@ -68,6 +68,26 @@ export default function SetupPage() {
           </div>
 
           <div className="sm:col-span-2">
+            <label className="block text-sm font-medium text-slate-700 mb-1.5 ml-1">Store Currency</label>
+            <div className="relative">
+              <select 
+                name="currency"
+                required
+                className="w-full bg-slate-50 border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 rounded-2xl px-5 py-3.5 text-slate-900 outline-none transition-all appearance-none cursor-pointer"
+                defaultValue="NGN"
+              >
+                <option value="NGN">Nigerian Naira (₦)</option>
+                <option value="USD">US Dollar ($)</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-5 text-slate-500">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+              </div>
+            </div>
+            {state?.errors?.currency && <p className="text-red-500 text-xs mt-1.5 ml-1">{state.errors.currency[0]}</p>}
+            <p className="text-xs text-slate-500 mt-2 ml-1">This is the currency your customers will see.</p>
+          </div>
+
+          <div className="sm:col-span-2">
             <label className="block text-sm font-medium text-slate-700 mb-1.5 ml-1">Description (Optional)</label>
             <textarea 
               name="description"
