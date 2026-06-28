@@ -46,3 +46,4 @@ next-env.d.ts
 .agents/*
 skills-lock.json
 .codegraph/*
+/docs/ui-ux-learning/
