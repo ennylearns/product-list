@@ -12,106 +12,99 @@ export default async function DashboardPage() {
   const stats = await getDashboardStats(userId);
 
   return (
-    <div className="max-w-4xl mx-auto space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out mt-8">
+    <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out mt-8 px-4 sm:px-0 pb-12">
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
         <div>
-          <h1 className={`${bricolage.className} text-4xl font-extrabold tracking-tight text-slate-900 mb-2 uppercase`}>
-            Operations Control
+          <h1 className={`${bricolage.className} text-3xl font-extrabold tracking-tight text-slate-900`}>
+            Store Overview
           </h1>
-          <p className="text-slate-600 text-lg">
-            Real-time telemetry of your store&apos;s inventory status.
-          </p>
         </div>
-        
-        <form action={signout}>
-          <button className="px-5 py-2.5 bg-transparent border-2 border-slate-900 text-slate-900 font-bold uppercase tracking-wider text-sm hover:bg-slate-900 hover:text-white transition-all shadow-[4px_4px_0px_0px_#0f172a] hover:shadow-[2px_2px_0px_0px_#0f172a] hover:translate-x-[2px] hover:translate-y-[2px] active:shadow-none active:translate-x-[4px] active:translate-y-[4px]">
-            LOG OUT
-          </button>
-        </form>
       </div>
 
       {stats.username && (
         <CopyStoreLinkBanner username={stats.username} />
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Total Products Card */}
-        <div className="bg-emerald-400 p-5 md:p-8 border-2 border-slate-900 shadow-[6px_6px_0px_0px_#0f172a] flex flex-col justify-between aspect-auto md:aspect-square group transition-all hover:-translate-y-1 hover:shadow-[6px_10px_0px_0px_#0f172a]">
-          <h2 className="text-slate-900 font-bold uppercase tracking-widest text-sm border-b-2 border-slate-900/20 pb-4">
-            Total Inventory
-          </h2>
-          <div className="mt-auto">
-            <span className={`${bricolage.className} text-5xl md:text-8xl font-black text-slate-900 group-hover:scale-110 origin-bottom-left transition-transform inline-block`}>
-              {stats.total}
-            </span>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Main Inventory Card */}
+        <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+          <div className="p-6 sm:p-8 border-b border-slate-100 flex-1">
+            <h2 className="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+              </svg>
+              Inventory Status
+            </h2>
+            <div className="grid grid-cols-3 gap-4">
+              <div>
+                <p className="text-slate-500 text-sm font-medium mb-1">Total</p>
+                <p className={`${bricolage.className} text-4xl font-bold text-slate-900`}>{stats.total}</p>
+              </div>
+              <div>
+                <p className="text-slate-500 text-sm font-medium mb-1">Active</p>
+                <p className={`${bricolage.className} text-4xl font-bold text-emerald-600`}>{stats.inStock}</p>
+              </div>
+              <div>
+                <p className="text-slate-500 text-sm font-medium mb-1">Depleted</p>
+                <p className={`${bricolage.className} text-4xl font-bold text-rose-500`}>{stats.outOfStock}</p>
+              </div>
+            </div>
+          </div>
+          <div className="bg-slate-50 p-4 sm:px-8 border-t border-slate-100 flex justify-end">
+            <Link 
+              href="/dashboard/products"
+              className="px-6 py-2.5 bg-slate-900 text-white font-medium rounded-lg hover:bg-slate-800 transition-colors text-sm flex items-center gap-2 w-full sm:w-auto justify-center"
+            >
+              Manage Products
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
           </div>
         </div>
 
-        {/* In Stock Card */}
-        <div className="bg-amber-300 p-5 md:p-8 border-2 border-slate-900 shadow-[6px_6px_0px_0px_#0f172a] flex flex-col justify-between aspect-auto md:aspect-square group transition-all hover:-translate-y-1 hover:shadow-[6px_10px_0px_0px_#0f172a]">
-          <h2 className="text-slate-900 font-bold uppercase tracking-widest text-sm border-b-2 border-slate-900/20 pb-4">
-            Active / In Stock
+        {/* Quick Links Card */}
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 flex flex-col gap-4">
+          <h2 className="text-lg font-bold text-slate-900 mb-2 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            Quick Actions
           </h2>
-          <div className="mt-auto">
-            <span className={`${bricolage.className} text-5xl md:text-8xl font-black text-slate-900 group-hover:scale-110 origin-bottom-left transition-transform inline-block`}>
-              {stats.inStock}
-            </span>
-          </div>
-        </div>
-
-        {/* Out of Stock Card */}
-        <div className="bg-rose-400 p-5 md:p-8 border-2 border-slate-900 shadow-[6px_6px_0px_0px_#0f172a] flex flex-col justify-between aspect-auto md:aspect-square group transition-all hover:-translate-y-1 hover:shadow-[6px_10px_0px_0px_#0f172a]">
-          <h2 className="text-slate-900 font-bold uppercase tracking-widest text-sm border-b-2 border-slate-900/20 pb-4">
-            Depleted
-          </h2>
-          <div className="mt-auto">
-            <span className={`${bricolage.className} text-5xl md:text-8xl font-black text-slate-900 group-hover:scale-110 origin-bottom-left transition-transform inline-block`}>
-              {stats.outOfStock}
-            </span>
-          </div>
+          <Link 
+            href="/dashboard/settings"
+            className="w-full px-4 py-3 bg-white text-slate-700 font-medium rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors text-sm flex items-center justify-between group"
+          >
+            Store Settings
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+          {stats.username && (
+            <Link 
+              href={`/${stats.username}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full px-4 py-3 bg-slate-50 text-slate-700 font-medium rounded-lg hover:bg-slate-100 border border-slate-100 transition-colors text-sm flex items-center justify-between group"
+            >
+              View Storefront
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </Link>
+          )}
         </div>
       </div>
 
-      <div className="pt-8 flex flex-col sm:flex-row gap-4">
-        <Link 
-          href="/dashboard/products"
-          className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-5 bg-slate-900 text-white font-bold uppercase tracking-widest overflow-hidden border-2 border-slate-900 shadow-[6px_6px_0px_0px_#0f172a] hover:shadow-[2px_2px_0px_0px_#0f172a] hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
-        >
-          <span className="relative z-10 flex items-center gap-3">
-            Manage Products Database
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+      <div className="pt-8 border-t border-slate-200 flex justify-center sm:justify-start">
+        <form action={signout}>
+          <button className="px-5 py-2.5 bg-white border border-slate-200 text-slate-500 font-medium text-sm rounded-lg hover:bg-slate-50 hover:text-rose-600 transition-colors flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
-          </span>
-          <div className="absolute inset-0 h-full w-0 bg-emerald-500 transition-all duration-300 ease-out group-hover:w-full z-0"></div>
-        </Link>
-        <Link 
-          href="/dashboard/settings"
-          className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-5 bg-amber-300 text-slate-900 font-bold uppercase tracking-widest overflow-hidden border-2 border-slate-900 shadow-[6px_6px_0px_0px_#0f172a] hover:shadow-[2px_2px_0px_0px_#0f172a] hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
-        >
-          <span className="relative z-10 flex items-center gap-3">
-            Store Settings
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 group-hover:rotate-90 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </span>
-        </Link>
-        {stats.username && (
-          <Link 
-            href={`/${stats.username}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 py-5 bg-transparent border-2 border-slate-900 text-slate-900 font-bold uppercase tracking-widest overflow-hidden shadow-[6px_6px_0px_0px_#0f172a] hover:shadow-[2px_2px_0px_0px_#0f172a] hover:translate-x-[4px] hover:translate-y-[4px] transition-all"
-          >
-            <span className="relative z-10 flex items-center gap-3">
-              View Storefront
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </span>
-          </Link>
-        )}
+            Log out
+          </button>
+        </form>
       </div>
     </div>
   );
