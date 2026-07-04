@@ -31,22 +31,8 @@ The deep forest green evokes trust, money, and growth without being a generic Sa
 
 ---
 
-**Logo**
-
-The logomark is a **storefront door with an arched awning** — literally a shop door. The arch (amber) is the canopy/awning, the white rectangle below is the door, and the dark circle is the handle. It reads at favicon size, works on dark, light, and amber backgrounds, and is immediately tied to the product concept.
-
----
-
 **Typography**
 
 Single typeface: **Plus Jakarta Sans** — modern, African-friendly, excellent weight range. Weight contrast (400/600/800) does all the visual hierarchy work instead of mixing families. Clean and fast-loading.
 
 ---
-
-**UX improvements over the MVP**
-- Sticky nav with clear primary CTA always visible
-- Phone mockup in the hero makes the product *tangible* before reading
-- Floating "New message" notification shows the core value prop (WhatsApp order) in action
-- "How it works" reduced to 3 brutal steps
-- Pricing uses a Nigerian Naira frame (₦) to signal who this is for
-- Footer + design system reference section at the bottom for your own use

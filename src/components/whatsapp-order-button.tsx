@@ -23,7 +23,7 @@ export function WhatsappOrderButton({
     return (
       <button
         disabled
-        className="w-full py-5 px-8 text-sm uppercase tracking-[0.2em] font-medium transition-all duration-500 bg-[#E5E5E5] text-[#A3A3A3] cursor-not-allowed"
+        className="w-full py-5 px-8 text-base font-medium transition-all duration-300 bg-[#E5E5E5] text-[#A3A3A3] cursor-not-allowed rounded-md opacity-70"
       >
         Unavailable
       </button>
@@ -68,7 +68,7 @@ ${currentUrl}`;
   return (
     <button
       onClick={handleOrderClick}
-      className="w-full py-5 px-8 text-sm uppercase tracking-[0.2em] font-medium transition-all duration-500 bg-wa-green text-white hover:bg-wa-green/90"
+      className="w-full py-5 px-8 text-base font-medium transition-all duration-300 bg-wa-green text-white rounded-md shadow-md cursor-pointer hover:bg-[#189D46] hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-wa-green active:scale-[0.98] active:shadow-sm active:translate-y-0"
     >
       Order on WhatsApp
     </button>

@@ -70,7 +70,7 @@ export default async function ProductDetailPage({ params }: Props) {
               )}
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-light leading-[0.9] tracking-tight mb-8 text-brand-green">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-light leading-tight tracking-tight mb-8 text-brand-green">
               {product.name}
             </h1>
 
@@ -98,18 +98,6 @@ export default async function ProductDetailPage({ params }: Props) {
               whatsappNumber={store.whatsappNumber}
               inStock={product.inStock}
             />
-
-            {/* Meta details */}
-            <div className="mt-16 space-y-6 text-sm text-brand-ink/70">
-              <div className="flex justify-between border-b border-brand-green/10 pb-4">
-                <span className="uppercase tracking-widest text-xs">Origin</span>
-                <span className="font-medium">{store.name}</span>
-              </div>
-              <div className="flex justify-between border-b border-brand-green/10 pb-4">
-                <span className="uppercase tracking-widest text-xs">Reference</span>
-                <span className="font-medium">#{product.id.toString().padStart(4, '0')}</span>
-              </div>
-            </div>
 
           </div>
         </div>
