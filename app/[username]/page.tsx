@@ -22,28 +22,25 @@ export default async function StorefrontPage({ params }: Props) {
   const { store, products } = data;
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7] text-[#1A1A1A] selection:bg-[#1A1A1A] selection:text-[#FDFBF7]">
+    <div className="min-h-screen bg-brand-offwhite text-brand-ink selection:bg-brand-green selection:text-brand-offwhite">
       {/* Decorative top border */}
-      <div className="h-1.5 w-full bg-[#1A1A1A]"></div>
+      <div className="h-1.5 w-full bg-brand-green"></div>
 
-      <main className="mx-auto max-w-7xl px-6 py-16 md:py-24 lg:px-8">
+      <main className="mx-auto max-w-7xl px-6 pt-8 pb-16 md:pt-12 md:pb-24 lg:px-8">
         {/* Header Section */}
-        <header className="mb-20 md:mb-32 max-w-3xl">
-          <p className="text-sm uppercase tracking-[0.2em] text-[#666666] mb-4 font-medium">
-            Curated Collection
-          </p>
-          <h1 className="text-6xl md:text-8xl font-light tracking-tight mb-8 leading-[0.9]">
+        <header className="mb-8 md:mb-12 max-w-3xl overflow-hidden">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight mb-8 leading-tight text-brand-green truncate">
             {store.name}
           </h1>
           {store.description && (
-            <p className="text-lg md:text-xl leading-relaxed text-[#4A4A4A] max-w-xl font-light">
+            <p className="text-lg md:text-xl leading-relaxed text-brand-ink max-w-xl font-light">
               {store.description}
             </p>
           )}
         </header>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-8 md:gap-y-16">
+        <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 md:gap-x-8 md:gap-y-12">
           {products.length === 0 ? (
             <div className="col-span-full py-20 text-center text-stone-500 font-light text-lg">
               No pieces currently available.
@@ -59,9 +56,9 @@ export default async function StorefrontPage({ params }: Props) {
                 <Link
                   key={product.id}
                   href={`/${username}/products/${product.id}`}
-                  className="group flex flex-col block"
+                  className="group flex flex-col block transition-all duration-300 md:hover:-translate-y-1 p-2 md:p-3 rounded-2xl border border-brand-green/15 md:border-transparent md:hover:border-brand-green/15 bg-white md:bg-transparent md:hover:bg-white"
                 >
-                  <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#F5F5F5] mb-6 flex items-center justify-center border border-[#E5E5E5]">
+                  <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl md:rounded-none bg-brand-offwhite mb-6 flex items-center justify-center border border-brand-green/10 transition-shadow duration-300 group-hover:shadow-xl">
                     {hasImage ? (
                       isVideoMedia ? (
                         <video
@@ -90,7 +87,7 @@ export default async function StorefrontPage({ params }: Props) {
                     {/* Out of stock badge */}
                     {!product.inStock && (
                       <div className="absolute top-4 left-4 z-10">
-                        <div className="bg-[#1A1A1A] text-white text-xs uppercase tracking-widest px-3 py-1.5 font-medium">
+                        <div className="bg-brand-ink text-white text-xs uppercase tracking-widest px-3 py-1.5 font-medium">
                           Out of Stock
                         </div>
                       </div>
@@ -98,10 +95,10 @@ export default async function StorefrontPage({ params }: Props) {
                   </div>
                   
                   <div className="flex flex-col space-y-2">
-                    <h3 className="text-xl md:text-2xl font-medium leading-tight group-hover:text-stone-600 transition-colors">
+                    <h3 className="text-base md:text-lg font-medium leading-tight group-hover:text-brand-green transition-colors text-brand-ink">
                       {product.name}
                     </h3>
-                    <p className="text-xs md:text-sm text-stone-500 tracking-wide">
+                    <p className="text-xs md:text-sm text-brand-ink/70 tracking-wide">
                       {priceFormatted}
                     </p>
                   </div>
@@ -113,7 +110,7 @@ export default async function StorefrontPage({ params }: Props) {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-[#E5E5E5] mt-24 py-12 text-center text-sm text-[#888888] tracking-widest uppercase">
+      <footer className="border-t border-brand-green/10 mt-24 py-12 text-center text-sm text-brand-green/70 tracking-widest uppercase">
         <p>© {new Date().getFullYear()} {store.name}. All rights reserved.</p>
       </footer>
     </div>

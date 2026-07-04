@@ -30,18 +30,18 @@ export default async function ProductDetailPage({ params }: Props) {
   const priceFormatted = formatPrice(product.price, store.currency || 'NGN');
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7] text-[#1A1A1A] selection:bg-[#1A1A1A] selection:text-[#FDFBF7] flex flex-col">
+    <div className="min-h-screen bg-brand-offwhite text-brand-ink selection:bg-brand-green selection:text-brand-offwhite flex flex-col">
       {/* Navigation Bar */}
       <nav className="w-full px-6 py-8 md:px-12 flex items-center justify-between z-10">
         <Link
           href={`/${username}`}
-          className="text-2xl md:text-3xl font-medium tracking-tight hover:opacity-70 transition-opacity"
+          className="text-2xl md:text-3xl font-medium tracking-tight hover:opacity-70 transition-opacity text-brand-green"
         >
           {store.name}
         </Link>
         <Link
           href={`/${username}`}
-          className="text-xs uppercase tracking-[0.2em] font-medium border-b border-transparent hover:border-[#1A1A1A] transition-colors pb-1"
+          className="text-xs uppercase tracking-[0.2em] font-medium border-b border-transparent hover:border-brand-green text-brand-ink transition-colors pb-1 hover:text-brand-green"
         >
           Back to Collection
         </Link>
@@ -60,32 +60,32 @@ export default async function ProductDetailPage({ params }: Props) {
             {/* Stock Badge */}
             <div className="mb-8">
               {product.inStock ? (
-                <span className="text-xs uppercase tracking-[0.2em] text-[#666666] font-medium before:content-[''] before:inline-block before:w-2 before:h-2 before:bg-green-800 before:rounded-full before:mr-3 before:align-middle">
+                <span className="text-xs uppercase tracking-[0.2em] text-brand-ink/70 font-medium before:content-[''] before:inline-block before:w-2 before:h-2 before:bg-brand-green-mid before:rounded-full before:mr-3 before:align-middle">
                   Available
                 </span>
               ) : (
-                <span className="text-xs uppercase tracking-[0.2em] text-[#666666] font-medium before:content-[''] before:inline-block before:w-2 before:h-2 before:bg-[#1A1A1A] before:rounded-full before:mr-3 before:align-middle">
+                <span className="text-xs uppercase tracking-[0.2em] text-brand-ink/70 font-medium before:content-[''] before:inline-block before:w-2 before:h-2 before:bg-brand-ink before:rounded-full before:mr-3 before:align-middle">
                   Out of Stock
                 </span>
               )}
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-light leading-[0.9] tracking-tight mb-8">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-light leading-[0.9] tracking-tight mb-8 text-brand-green">
               {product.name}
             </h1>
 
-            <div className="text-xl md:text-2xl font-light text-[#4A4A4A] mb-12">
+            <div className="text-xl md:text-2xl font-light text-brand-ink/80 mb-12">
               {priceFormatted}
             </div>
 
-            <div className="h-px w-full bg-[#E5E5E5] mb-12"></div>
+            <div className="h-px w-full bg-brand-green/10 mb-12"></div>
 
             {product.description ? (
-              <div className="prose prose-stone prose-lg max-w-none text-[#4A4A4A] font-light leading-relaxed mb-16 whitespace-pre-wrap">
+              <div className="prose prose-stone prose-lg max-w-none text-brand-ink font-light leading-relaxed mb-16 whitespace-pre-wrap">
                 <p>{product.description}</p>
               </div>
             ) : (
-              <div className="text-[#888888] font-light italic mb-16">
+              <div className="text-brand-ink/60 font-light italic mb-16">
                 No description provided.
               </div>
             )}
@@ -100,12 +100,12 @@ export default async function ProductDetailPage({ params }: Props) {
             />
 
             {/* Meta details */}
-            <div className="mt-16 space-y-6 text-sm text-[#666666]">
-              <div className="flex justify-between border-b border-[#E5E5E5] pb-4">
+            <div className="mt-16 space-y-6 text-sm text-brand-ink/70">
+              <div className="flex justify-between border-b border-brand-green/10 pb-4">
                 <span className="uppercase tracking-widest text-xs">Origin</span>
                 <span className="font-medium">{store.name}</span>
               </div>
-              <div className="flex justify-between border-b border-[#E5E5E5] pb-4">
+              <div className="flex justify-between border-b border-brand-green/10 pb-4">
                 <span className="uppercase tracking-widest text-xs">Reference</span>
                 <span className="font-medium">#{product.id.toString().padStart(4, '0')}</span>
               </div>

@@ -68,7 +68,7 @@ ${currentUrl}`;
   return (
     <button
       onClick={handleOrderClick}
-      className="w-full py-5 px-8 text-sm uppercase tracking-[0.2em] font-medium transition-all duration-500 bg-[#1A1A1A] text-white hover:bg-[#333333]"
+      className="w-full py-5 px-8 text-sm uppercase tracking-[0.2em] font-medium transition-all duration-500 bg-wa-green text-white hover:bg-wa-green/90"
     >
       Order on WhatsApp
     </button>
